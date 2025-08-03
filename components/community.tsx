@@ -21,7 +21,7 @@ export function Community() {
       id: 1,
       title: "Pulse-Robot-Template",
       description: "The Humanoid Companion That Learns And Adapts Alongside You.",
-      image: "/images/placeholder.jpg",
+      image: "/images/Home/Rectangle 2.png",
       remixes: "23.4k",
       isLiked: false
     },
@@ -29,7 +29,7 @@ export function Community() {
       id: 2,
       title: "Pulse-Robot-Template",
       description: "The Humanoid Companion That Learns And Adapts Alongside You.",
-      image: "/images/placeholder.jpg",
+      image: "/images/Home/Rectangle 2-1.png",
       remixes: "18.2k",
       isLiked: true
     },
@@ -37,7 +37,7 @@ export function Community() {
       id: 3,
       title: "Pulse-Robot-Template",
       description: "The Humanoid Companion That Learns And Adapts Alongside You.",
-      image: "/images/placeholder.jpg",
+      image: "/images/Home/Rectangle 2-2.png",
       remixes: "15.7k",
       isLiked: false
     },
@@ -45,7 +45,7 @@ export function Community() {
       id: 4,
       title: "Pulse-Robot-Template",
       description: "The Humanoid Companion That Learns And Adapts Alongside You.",
-      image: "/images/placeholder.jpg",
+      image: "/images/Home/Rectangle 2-3.png",
       remixes: "12.9k",
       isLiked: false
     },
@@ -53,7 +53,7 @@ export function Community() {
       id: 5,
       title: "Pulse-Robot-Template",
       description: "The Humanoid Companion That Learns And Adapts Alongside You.",
-      image: "/images/placeholder.jpg",
+      image: "/images/Home/Rectangle 2-4.png",
       remixes: "9.3k",
       isLiked: false
     },
@@ -61,7 +61,7 @@ export function Community() {
       id: 6,
       title: "Pulse-Robot-Template",
       description: "The Humanoid Companion That Learns And Adapts Alongside You.",
-      image: "/images/placeholder.jpg",
+      image: "/images/Home/Rectangle 2-5.png",
       remixes: "7.1k",
       isLiked: false
     }
@@ -104,6 +104,12 @@ export function Community() {
                     src={template.image} 
                     alt={template.title}
                     className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    onError={(e) => {
+                      // Fallback to a gradient background if image fails to load
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      target.parentElement!.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                    }}
                   />
                   <div className="absolute top-3 left-3">
                     <Badge variant="secondary" className="bg-white/90 text-gray-700">
