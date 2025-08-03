@@ -21,7 +21,7 @@ export function Testimonials() {
       id: 1,
       name: "Mikhail Antimsu",
       role: "Happy Client",
-      avatar: "/images/placeholder-user.jpg",
+      avatar: "/images/Home/banerbg.png",
       rating: 5,
       content: "Shinecoder transformed our business. We went from idea to live product in just 2 days. The AI understood exactly what we needed and delivered beyond our expectations."
     },
@@ -29,7 +29,7 @@ export function Testimonials() {
       id: 2,
       name: "Sarah Johnson",
       role: "Product Manager",
-      avatar: "/images/placeholder-user.jpg",
+      avatar: "/images/Home/banerbg.png",
       rating: 5,
       content: "Incredible platform! The templates are beautiful and the AI is incredibly smart. We saved months of development time and got a professional result."
     },
@@ -37,7 +37,7 @@ export function Testimonials() {
       id: 3,
       name: "David Chen",
       role: "Startup Founder",
-      avatar: "/images/placeholder-user.jpg",
+      avatar: "/images/Home/banerbg.png",
       rating: 5,
       content: "This is exactly what we needed. No coding required, just describe what you want and watch the magic happen. Highly recommended!"
     },
@@ -45,7 +45,7 @@ export function Testimonials() {
       id: 4,
       name: "Emily Rodriguez",
       role: "Designer",
-      avatar: "/images/placeholder-user.jpg",
+      avatar: "/images/Home/banerbg.png",
       rating: 5,
       content: "The quality of the generated code is outstanding. Clean, responsive, and follows best practices. This tool is a game-changer."
     }
@@ -99,11 +99,9 @@ export function Testimonials() {
 
                   {/* Author */}
                   <div className="flex items-center gap-4">
-                    <img 
-                      src={testimonial.avatar} 
-                      alt={testimonial.name}
-                      className="w-12 h-12 rounded-full object-cover"
-                    />
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-pink-500 flex items-center justify-center text-white font-semibold text-lg">
+                      {testimonial.name.charAt(0)}
+                    </div>
                     <div>
                       <div className="font-semibold text-gray-900">{testimonial.name}</div>
                       <div className="text-sm text-gray-600">{testimonial.role}</div>

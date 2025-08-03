@@ -1,7 +1,12 @@
+"use client"
+
 import Link from "next/link"
 import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react"
+import { useState } from "react"
 
 export function Footer() {
+  const [logoError, setLogoError] = useState(false)
+
   return (
     <footer className="bg-gray-900 text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -9,14 +14,21 @@ export function Footer() {
           {/* Logo and Description */}
           <div className="md:col-span-2 space-y-4">
             <Link href="/" className="inline-block">
-              <img
-                src="/images/Logo/shinecoderlogo.svg"
-                alt="Shinecoder Logo"
-                className="h-12 w-auto"
-              />
+              {!logoError ? (
+                <img
+                  src="/images/Logo/shinecoderlogo.svg"
+                  alt="Shinecoder Logo"
+                  className="h-12 w-auto"
+                  onError={() => setLogoError(true)}
+                />
+              ) : (
+                <div className="h-12 px-6 bg-gradient-to-r from-blue-600 to-pink-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
+                  Shinecoder
+                </div>
+              )}
             </Link>
             <p className="text-gray-400 max-w-md">
-              From simple prompts, build complete websites and dashboards that are clean, 
+              From simple prompts, build complete websites and dashboards that are clean,
               responsive, and ready to use. No coding required.
             </p>
             <div className="flex space-x-4">

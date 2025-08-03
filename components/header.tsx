@@ -7,17 +7,25 @@ import { Menu, X } from "lucide-react"
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [logoError, setLogoError] = useState(false)
 
   return (
     <header className="fixed top-4 left-4 right-4 z-[100]">
       <div className="bg-white/95 backdrop-blur-sm rounded-[50px] shadow-2xl p-4 max-w-6xl mx-auto">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-3">
-            <img
-              src="/images/Logo/shinecoderlogo.svg"
-              alt="shinecoderR Logo"
-              className="h-10 w-auto"
-            />
+            {!logoError ? (
+              <img
+                src="/images/Logo/shinecoderlogo.svg"
+                alt="Shinecoder Logo"
+                className="h-10 w-auto"
+                onError={() => setLogoError(true)}
+              />
+            ) : (
+              <div className="h-10 px-4 bg-gradient-to-r from-blue-600 to-pink-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">
+                Shinecoder
+              </div>
+            )}
           </Link>
 
           {/* Right side content */}

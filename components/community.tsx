@@ -68,7 +68,7 @@ export function Community() {
   ])
 
   const toggleLike = (id: number) => {
-    setTemplates(templates.map(template => 
+    setTemplates(templates.map(template =>
       template.id === id ? { ...template, isLiked: !template.isLiked } : template
     ))
   }
@@ -100,8 +100,8 @@ export function Community() {
               <CardContent className="p-0">
                 {/* Image */}
                 <div className="relative overflow-hidden rounded-t-lg">
-                  <img 
-                    src={template.image} 
+                  <img
+                    src={template.image}
                     alt={template.title}
                     className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                     onError={(e) => {
@@ -136,7 +136,7 @@ export function Community() {
                   <p className="text-gray-600 text-sm mb-4 line-clamp-2">
                     {template.description}
                   </p>
-                  
+
                   <div className="flex items-center justify-between">
                     <div className="text-sm text-gray-500">
                       {template.remixes} remixes
@@ -159,8 +159,8 @@ export function Community() {
 
         {/* View More Button */}
         <div className="text-center mt-12">
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             size="lg"
             className="border-2 border-gray-300 text-gray-700 px-8 py-3 text-lg font-semibold rounded-full hover:border-blue-500 hover:text-blue-600 transition-all duration-300"
           >
