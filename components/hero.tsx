@@ -36,14 +36,14 @@ export function Hero() {
 
           {/* Subheading */}
           <p className="text-xl sm:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-            From simple prompts, build complete websites and dashboards that are clean, 
+            From simple prompts, build complete websites and dashboards that are clean,
             responsive, and ready to use. No coding required.
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="bg-gradient-to-r from-blue-600 to-pink-600 hover:from-blue-700 hover:to-pink-700 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
@@ -51,10 +51,10 @@ export function Hero() {
               Start Building Free
               <ArrowRight className={`ml-2 w-5 h-5 transition-transform duration-300 ${isHovered ? 'translate-x-1' : ''}`} />
             </Button>
-            
-            <Button 
-              variant="outline" 
-              size="lg" 
+
+            <Button
+              variant="outline"
+              size="lg"
               className="border-2 border-gray-300 text-gray-700 px-8 py-4 text-lg font-semibold rounded-full hover:border-blue-500 hover:text-blue-600 transition-all duration-300"
             >
               <Play className="mr-2 w-5 h-5" />
