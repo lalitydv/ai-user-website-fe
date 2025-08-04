@@ -10,7 +10,7 @@ import { Paperclip, Globe, Send, Plus, Check, AlertCircle } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import Typewriter from 'typewriter-effect'
-import { KnowledgeTransferAnimation } from './knowledge-transfer-animation'
+
 
 export function Hero() {
   const [prompt, setPrompt] = useState("")
@@ -110,11 +110,10 @@ export function Hero() {
         backgroundImage: 'url(/images/Home/banerbg.png)'
       }}
     >
-      {/* Knowledge Transfer Animation */}
-      <KnowledgeTransferAnimation />
+
 
       {/* Overlay for better text readability */}
-      <div className="absolute inset-0 bg-white/5"></div>
+      <div className="absolute inset-0 bg-white/5 dark:bg-black/20"></div>
 
       {/* Content */}
       <div className="relative z-10">
@@ -122,14 +121,14 @@ export function Hero() {
           <div className="text-center max-w-4xl mx-auto">
             <div className="space-y-6">
               <div className="space-y-6">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
                   CREATE WEBSITES & DASHBOARDS WITH
                   <br />
                   <span className="bg-gradient-to-r from-[#F72353] to-[#235EAD] bg-clip-text text-transparent">
                     A SIMPLE PROMPT
                   </span>
                 </h1>
-                <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto">
+                <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
                   From Simple Prompts, Buildro Designs Full Websites And Dashboards That
                   <br />
                   Are Clean, Responsive, And Ready To Use.
@@ -155,7 +154,7 @@ export function Hero() {
 
                 {/* Clean Prompt Interface */}
                 <div className="flex-1 max-w-4xl relative z-10">
-                  <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-6">
+                  <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-6">
                     <div className="space-y-4">
                       <div className="relative">
                         <textarea
@@ -181,9 +180,9 @@ export function Hero() {
                           onFocus={() => setIsFocused(true)}
                           onBlur={() => setIsFocused(false)}
                           rows={3}
-                          className={`w-full text-base py-4 px-4 border rounded-xl bg-white resize-none transition-all duration-300 ${isFocused
+                          className={`w-full text-base py-4 px-4 border rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none transition-all duration-300 ${isFocused
                             ? 'border-[#F72353] ring-2 ring-[#F72353]/20 shadow-lg'
-                            : 'border-gray-200 focus:ring-2 focus:ring-[#F72353]/20 focus:border-[#F72353]'
+                            : 'border-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-[#F72353]/20 focus:border-[#F72353]'
                             }`}
                           placeholder=""
                           style={{
@@ -192,7 +191,7 @@ export function Hero() {
                           }}
                         />
                         {!isFocused && (
-                          <div className="absolute inset-0 pointer-events-none flex items-center px-4 py-1 text-gray-500">
+                          <div className="absolute inset-0 pointer-events-none flex items-center px-4 py-1 text-gray-500 dark:text-gray-400">
                             <Typewriter
                               options={{
                                 strings: prompts,
@@ -213,7 +212,7 @@ export function Hero() {
                           {/* Plus Dropdown */}
                           <DropdownMenu open={isPlusDropdownOpen} onOpenChange={setIsPlusDropdownOpen}>
                             <DropdownMenuTrigger asChild>
-                              <Button variant="ghost" size="sm" className="text-gray-500 hover:text-[#F72353]">
+                              <Button variant="ghost" size="sm" className="text-gray-500 dark:text-gray-400 hover:text-[#F72353] dark:hover:text-[#F72353]">
                                 <Plus className="h-4 w-4" />
                               </Button>
                             </DropdownMenuTrigger>
@@ -237,7 +236,7 @@ export function Hero() {
                           <Button
                             variant="ghost"
                             size="sm"
-                            className="text-gray-500 hover:text-[#F72353]"
+                            className="text-gray-500 dark:text-gray-400 hover:text-[#F72353] dark:hover:text-[#F72353]"
                             onClick={handleFileUpload}
                           >
                             <Paperclip className="h-4 w-4 mr-2" />
@@ -247,7 +246,7 @@ export function Hero() {
                           {/* Public Dropdown */}
                           <DropdownMenu open={isPublicDropdownOpen} onOpenChange={setIsPublicDropdownOpen}>
                             <DropdownMenuTrigger asChild>
-                              <Button variant="ghost" size="sm" className="text-gray-500 hover:text-[#235EAD]">
+                              <Button variant="ghost" size="sm" className="text-gray-500 dark:text-gray-400 hover:text-[#235EAD] dark:hover:text-[#235EAD]">
                                 <Globe className="h-4 w-4 mr-2" />
                                 Public
                               </Button>
@@ -257,14 +256,14 @@ export function Hero() {
                                 {privacyOptions.map((option) => (
                                   <div
                                     key={option.id}
-                                    className="flex items-start space-x-3 cursor-pointer hover:bg-gray-50 p-2 rounded-lg"
+                                    className="flex items-start space-x-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 p-2 rounded-lg"
                                     onClick={() => setSelectedPrivacy(option.id)}
                                   >
                                     <div className="flex items-center justify-center w-5 h-5 mt-0.5">
                                       <div
                                         className={`w-4 h-4 rounded-full border-2 ${selectedPrivacy === option.id
                                           ? "border-[#F72353] bg-[#F72353]"
-                                          : "border-gray-300"
+                                          : "border-gray-300 dark:border-gray-600"
                                           }`}
                                       >
                                         {selectedPrivacy === option.id && (
@@ -275,8 +274,8 @@ export function Hero() {
                                       </div>
                                     </div>
                                     <div className="flex-1">
-                                      <div className="font-semibold text-gray-900">{option.title}</div>
-                                      <div className="text-sm text-gray-600">{option.description}</div>
+                                      <div className="font-semibold text-gray-900 dark:text-white">{option.title}</div>
+                                      <div className="text-sm text-gray-600 dark:text-gray-400">{option.description}</div>
                                     </div>
                                   </div>
                                 ))}
@@ -371,7 +370,7 @@ export function Hero() {
               <span className="text-white text-2xl">🚀</span>
             </div>
             <h3 className="text-lg font-semibold mb-2">Coming Soon!</h3>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
               Adobe XD import functionality is currently in development and will be available soon.
             </p>
             <Button

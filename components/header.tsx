@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -25,7 +26,7 @@ export function Header() {
   return (
     <>
       <header className="fixed top-4 left-4 right-4 z-[100]">
-        <div className="bg-white/95 backdrop-blur-sm rounded-[50px] shadow-2xl p-4 max-w-6xl mx-auto">
+        <div className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm rounded-[50px] shadow-2xl p-4 max-w-6xl mx-auto border border-gray-200/50 dark:border-gray-700/50">
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center space-x-3">
               {!logoError ? (
@@ -45,23 +46,26 @@ export function Header() {
             {/* Right side content */}
             <div className="flex items-center space-x-4">
               <div className="hidden md:flex items-center space-x-6">
-                <Link href="#community" className="text-gray-700 hover:text-[#F72353] transition-colors">
+                <Link href="#community" className="text-gray-700 dark:text-gray-300 hover:text-[#F72353] dark:hover:text-[#F72353] transition-colors">
                   Community
                 </Link>
-                <Link href="#pricing" className="text-gray-700 hover:text-[#F72353] transition-colors">
+                <Link href="#pricing" className="text-gray-700 dark:text-gray-300 hover:text-[#F72353] dark:hover:text-[#F72353] transition-colors">
                   Pricing
                 </Link>
-                <Link href="#tutorial" className="text-gray-700 hover:text-[#F72353] transition-colors">
+                <Link href="#tutorial" className="text-gray-700 dark:text-gray-300 hover:text-[#F72353] dark:hover:text-[#F72353] transition-colors">
                   Tutorial
                 </Link>
-                <Link href="#story" className="text-gray-700 hover:text-[#F72353] transition-colors">
+                <Link href="#story" className="text-gray-700 dark:text-gray-300 hover:text-[#F72353] dark:hover:text-[#F72353] transition-colors">
                   Our Story
                 </Link>
               </div>
               <div className="flex items-center space-x-3">
+                {/* Theme Toggle */}
+                <ThemeToggle />
+                
                 <Button
                   variant="outline"
-                  className="border-[#F72353] text-[#F72353] hover:bg-[#F72353] hover:text-white bg-transparent rounded-full px-4"
+                  className="border-[#F72353] text-[#F72353] hover:bg-[#F72353] hover:text-white bg-transparent dark:bg-transparent dark:border-[#F72353] dark:text-[#F72353] dark:hover:bg-[#F72353] dark:hover:text-white rounded-full px-4"
                   asChild
                 >
                   <Link href="/login">Login</Link>
@@ -77,10 +81,10 @@ export function Header() {
 
             {/* Mobile menu button */}
             <button
-              className="md:hidden ml-4 p-2 hover:bg-gray-100 rounded-full transition-colors"
+              className="md:hidden ml-4 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
               onClick={() => setIsMenuOpen(true)}
             >
-              <Menu className="h-6 w-6" />
+              <Menu className="h-6 w-6 text-gray-700 dark:text-gray-300" />
             </button>
           </div>
         </div>
@@ -95,10 +99,10 @@ export function Header() {
         />
 
         {/* Sidebar Panel */}
-        <div className={`absolute top-0 right-0 h-full w-80 max-w-[90vw] bg-white shadow-2xl transform transition-transform duration-300 ease-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className={`absolute top-0 right-0 h-full w-80 max-w-[90vw] bg-white dark:bg-gray-900 shadow-2xl transform transition-transform duration-300 ease-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
           <div className="flex flex-col h-full">
             {/* Sidebar Header */}
-            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+            <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center space-x-3">
                 {!logoError ? (
                   <img
@@ -112,13 +116,13 @@ export function Header() {
                     buildro.ai
                   </div>
                 )}
-                <span className="text-lg font-semibold text-gray-800">Menu</span>
+                <span className="text-lg font-semibold text-gray-800 dark:text-gray-200">Menu</span>
               </div>
               <button
                 onClick={() => setIsMenuOpen(false)}
-                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
               >
-                <X className="h-5 w-5" />
+                <X className="h-5 w-5 text-gray-700 dark:text-gray-300" />
               </button>
             </div>
 
@@ -127,7 +131,7 @@ export function Header() {
               <div className="space-y-2">
                 <Link
                   href="#community"
-                  className="flex items-center py-4 px-4 text-gray-700 hover:text-[#F72353] hover:bg-gray-50 rounded-xl transition-all duration-200 group"
+                  className="flex items-center py-4 px-4 text-gray-700 dark:text-gray-300 hover:text-[#F72353] dark:hover:text-[#F72353] hover:bg-gray-50 dark:hover:bg-gray-800 rounded-xl transition-all duration-200 group"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <span className="text-lg font-medium">Community</span>
@@ -135,7 +139,7 @@ export function Header() {
                 </Link>
                 <Link
                   href="#pricing"
-                  className="flex items-center py-4 px-4 text-gray-700 hover:text-[#F72353] hover:bg-gray-50 rounded-xl transition-all duration-200 group"
+                  className="flex items-center py-4 px-4 text-gray-700 dark:text-gray-300 hover:text-[#F72353] dark:hover:text-[#F72353] hover:bg-gray-50 dark:hover:bg-gray-800 rounded-xl transition-all duration-200 group"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <span className="text-lg font-medium">Pricing</span>
@@ -143,7 +147,7 @@ export function Header() {
                 </Link>
                 <Link
                   href="#tutorial"
-                  className="flex items-center py-4 px-4 text-gray-700 hover:text-[#F72353] hover:bg-gray-50 rounded-xl transition-all duration-200 group"
+                  className="flex items-center py-4 px-4 text-gray-700 dark:text-gray-300 hover:text-[#F72353] dark:hover:text-[#F72353] hover:bg-gray-50 dark:hover:bg-gray-800 rounded-xl transition-all duration-200 group"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <span className="text-lg font-medium">Tutorial</span>
@@ -151,7 +155,7 @@ export function Header() {
                 </Link>
                 <Link
                   href="#story"
-                  className="flex items-center py-4 px-4 text-gray-700 hover:text-[#F72353] hover:bg-gray-50 rounded-xl transition-all duration-200 group"
+                  className="flex items-center py-4 px-4 text-gray-700 dark:text-gray-300 hover:text-[#F72353] dark:hover:text-[#F72353] hover:bg-gray-50 dark:hover:bg-gray-800 rounded-xl transition-all duration-200 group"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <span className="text-lg font-medium">Our Story</span>
@@ -161,10 +165,10 @@ export function Header() {
             </nav>
 
             {/* Action Buttons */}
-            <div className="p-6 space-y-3 border-t border-gray-200">
+            <div className="p-6 space-y-3 border-t border-gray-200 dark:border-gray-700">
               <Button
                 variant="outline"
-                className="w-full border-[#F72353] text-[#F72353] hover:bg-[#F72353] hover:text-white bg-transparent rounded-xl py-3 text-base font-medium"
+                className="w-full border-[#F72353] text-[#F72353] hover:bg-[#F72353] hover:text-white bg-transparent dark:bg-transparent dark:border-[#F72353] dark:text-[#F72353] dark:hover:bg-[#F72353] dark:hover:text-white rounded-xl py-3 text-base font-medium"
                 asChild
               >
                 <Link href="/login">Login</Link>
