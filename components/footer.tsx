@@ -1,33 +1,62 @@
 "use client"
 
 import Link from "next/link"
-import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react"
+import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react"
 import { useState } from "react"
 
 export function Footer() {
   const [logoError, setLogoError] = useState(false)
+  const [videoError, setVideoError] = useState(false)
 
   return (
-    <footer className="bg-gray-900 text-white">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid md:grid-cols-5 gap-8">
+    <footer className="relative bg-gray-900 text-white overflow-hidden">
+      {/* Video Background */}
+      {!videoError && (
+        <div className="absolute inset-0 z-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+            onError={() => setVideoError(true)}
+          >
+            <source src="/videos/f215500.mp4" type="video/mp4" />
+            <source src="/videos/215500.mp4" type="video/webm" />
+          </video>
+          {/* High opacity overlay */}
+          <div className="absolute inset-0 bg-black/80"></div>
+        </div>
+      )}
+
+      {/* Fallback CSS Gradient Animation */}
+      {videoError && (
+        <div className="absolute inset-0 z-0">
+          <div className="w-full h-full bg-gradient-to-r from-blue-900 via-purple-900 to-pink-900 animate-gradient"></div>
+          <div className="absolute inset-0 bg-black/70"></div>
+        </div>
+      )}
+
+      {/* Content */}
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid md:grid-cols-3 gap-8">
           {/* Logo and Description */}
-          <div className="md:col-span-2 space-y-4">
+          <div className="space-y-4">
             <Link href="/" className="inline-block">
               {!logoError ? (
                 <img
-                  src="/images/Logo/shinecoderlogo.svg"
-                  alt="Shinecoder Logo"
+                  src="/images/Logo/buildro-logo.png"
+                  alt="buildro.ai Logo"
                   className="h-12 w-auto"
                   onError={() => setLogoError(true)}
                 />
               ) : (
                 <div className="h-12 px-6 bg-gradient-to-r from-blue-600 to-pink-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">
-                  Shinecoder
+                  buildro.ai
                 </div>
               )}
             </Link>
-            <p className="text-gray-400 max-w-md">
+            <p className="text-gray-300 max-w-md">
               From simple prompts, build complete websites and dashboards that are clean,
               responsive, and ready to use. No coding required.
             </p>
@@ -47,42 +76,10 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Sitemap */}
-          <div>
-            <h4 className="font-semibold mb-4 text-white">Sitemap</h4>
-            <ul className="space-y-2 text-gray-400">
-              <li>
-                <Link href="/" className="hover:text-blue-500 transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="#community" className="hover:text-blue-500 transition-colors">
-                  Community
-                </Link>
-              </li>
-              <li>
-                <Link href="#pricing" className="hover:text-blue-500 transition-colors">
-                  Pricing
-                </Link>
-              </li>
-              <li>
-                <Link href="#tutorial" className="hover:text-blue-500 transition-colors">
-                  Tutorial
-                </Link>
-              </li>
-              <li>
-                <Link href="#story" className="hover:text-blue-500 transition-colors">
-                  Our Story
-                </Link>
-              </li>
-            </ul>
-          </div>
-
           {/* Socials */}
           <div>
             <h4 className="font-semibold mb-4 text-white">Socials</h4>
-            <ul className="space-y-2 text-gray-400">
+            <ul className="space-y-2 text-gray-300">
               <li>
                 <Link href="#" className="hover:text-blue-500 transition-colors">
                   Facebook
@@ -106,38 +103,17 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Head Office */}
+          {/* Newsletter */}
           <div>
-            <h4 className="font-semibold mb-4 text-white">Head Office</h4>
-            <div className="space-y-3 text-gray-400">
-              <div className="flex items-start space-x-2">
-                <MapPin className="h-4 w-4 mt-0.5 text-blue-500" />
-                <span>7th Cross Chiranahalli Badavane<br />Mandya 571401</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Mail className="h-4 w-4 text-blue-500" />
-                <span>info@shinecoder.com</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Phone className="h-4 w-4 text-blue-500" />
-                <span>+91 94805 55553</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Newsletter */}
-        <div className="mt-8 pt-8 border-t border-gray-800">
-          <div className="max-w-md">
             <h4 className="font-semibold mb-4 text-white">Newsletter</h4>
-            <p className="text-gray-400 mb-4">Stay updated with our latest features and updates.</p>
-            <div className="flex space-x-2">
+            <p className="text-gray-300 mb-4">Stay updated with our latest features and updates.</p>
+            <div className="flex flex-col space-y-2">
               <input
                 type="email"
                 placeholder="Enter your email address"
-                className="flex-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
+                className="w-full px-4 py-2 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 backdrop-blur-sm"
               />
-              <button className="px-6 py-2 bg-gradient-to-r from-blue-600 to-pink-600 hover:from-blue-700 hover:to-pink-700 text-white rounded-lg transition-all duration-300">
+              <button className="w-full px-6 py-2 bg-gradient-to-r from-blue-600 to-pink-600 hover:from-blue-700 hover:to-pink-700 text-white rounded-lg transition-all duration-300">
                 Subscribe
               </button>
             </div>
@@ -145,8 +121,8 @@ export function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 Shinecoder. All rights reserved.</p>
+        <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
+          <p>&copy; 2024 buildro.ai. All rights reserved.</p>
         </div>
       </div>
     </footer>

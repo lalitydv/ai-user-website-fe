@@ -31,7 +31,7 @@ export default function SignupPage() {
             <div className="w-10 h-10 bg-gradient-to-r from-[#F72353] to-[#235EAD] rounded-lg flex items-center justify-center">
               <span className="text-white font-bold">S</span>
             </div>
-            <span className="text-2xl font-bold text-gray-900">shinecoderR</span>
+                            <span className="text-2xl font-bold text-gray-900">buildro.ai</span>
           </Link>
         </div>
 

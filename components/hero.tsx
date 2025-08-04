@@ -10,6 +10,7 @@ import { Paperclip, Globe, Send, Plus, Check, AlertCircle } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import Typewriter from 'typewriter-effect'
+import { KnowledgeTransferAnimation } from './knowledge-transfer-animation'
 
 export function Hero() {
   const [prompt, setPrompt] = useState("")
@@ -109,6 +110,9 @@ export function Hero() {
         backgroundImage: 'url(/images/Home/banerbg.png)'
       }}
     >
+      {/* Knowledge Transfer Animation */}
+      <KnowledgeTransferAnimation />
+
       {/* Overlay for better text readability */}
       <div className="absolute inset-0 bg-white/5"></div>
 

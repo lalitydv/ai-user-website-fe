@@ -7,7 +7,7 @@ import { Header } from "@/components/header"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "shinecoderR - Create Websites & Dashboards with AI",
+  title: "buildro.ai - Create Websites & Dashboards with AI",
   description:
     "From Simple Prompts, Buildro Designs Full Websites And Dashboards That Are Clean, Responsive, And Ready To Use.",
     generator: 'v0.dev'

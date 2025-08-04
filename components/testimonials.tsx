@@ -23,7 +23,7 @@ export function Testimonials() {
       role: "Happy Client",
       avatar: "/images/Home/banerbg.png",
       rating: 5,
-      content: "Shinecoder transformed our business. We went from idea to live product in just 2 days. The AI understood exactly what we needed and delivered beyond our expectations."
+      content: "buildro.ai transformed our business. We went from idea to live product in just 2 days. The AI understood exactly what we needed and delivered beyond our expectations."
     },
     {
       id: 2,
@@ -75,7 +75,7 @@ export function Testimonials() {
             <div className="w-8 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500"></div>
           </div>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            See what our customers are saying about their experience with Shinecoder.
+            See what our customers are saying about their experience with buildro.ai.
           </p>
         </div>
 
