@@ -4,12 +4,14 @@ import { Pricing } from "@/components/pricing"
 import { Process } from "@/components/process"
 import { Testimonials } from "@/components/testimonials"
 import { Footer } from "@/components/footer"
+import { VideoIntro } from "@/components/video-intro"
 
 export default function HomePage() {
   return (
     <main>
       <Hero />
       <Community />
+      <VideoIntro />
       <Pricing />
       <Process />
       <Testimonials />

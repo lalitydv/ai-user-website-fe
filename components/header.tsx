@@ -3,12 +3,16 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
+import { Menu, X, User, LogOut } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { useAuth } from "@/contexts/AuthContext"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [logoError, setLogoError] = useState(false)
+  const { user, signOut } = useAuth()
 
   // Prevent body scroll when menu is open
   useEffect(() => {
@@ -22,6 +26,19 @@ export function Header() {
       document.body.style.overflow = 'unset'
     }
   }, [isMenuOpen])
+
+  const handleSignOut = async () => {
+    await signOut()
+  }
+
+  const getUserInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map(word => word.charAt(0))
+      .join('')
+      .toUpperCase()
+      .slice(0, 2)
+  }
 
   return (
     <>
@@ -62,20 +79,66 @@ export function Header() {
               <div className="flex items-center space-x-3">
                 {/* Theme Toggle */}
                 <ThemeToggle />
-                
-                <Button
-                  variant="outline"
-                  className="border-[#F72353] text-[#F72353] hover:bg-[#F72353] hover:text-white bg-transparent dark:bg-transparent dark:border-[#F72353] dark:text-[#F72353] dark:hover:bg-[#F72353] dark:hover:text-white rounded-full px-4"
-                  asChild
-                >
-                  <Link href="/login">Login</Link>
-                </Button>
-                <Button
-                  className="bg-gradient-to-r from-[#F72353] to-[#235EAD] hover:from-[#F72353]/90 hover:to-[#235EAD]/90 text-white rounded-full px-4"
-                  asChild
-                >
-                  <Link href="/signup">Try Free</Link>
-                </Button>
+
+                {user ? (
+                  /* User is logged in */
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" className="relative h-9 w-9 rounded-full">
+                        <Avatar className="h-9 w-9">
+                          <AvatarImage src={user.user_metadata?.avatar_url} alt={user.user_metadata?.full_name || user.email} />
+                          <AvatarFallback className="bg-gradient-to-r from-[#F72353] to-[#235EAD] text-white text-sm">
+                            {user.user_metadata?.full_name
+                              ? getUserInitials(user.user_metadata.full_name)
+                              : user.email?.charAt(0).toUpperCase() || 'U'
+                            }
+                          </AvatarFallback>
+                        </Avatar>
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-56" align="end" forceMount>
+                      <div className="flex items-center justify-start gap-2 p-2">
+                        <div className="flex flex-col space-y-1 leading-none">
+                          {user.user_metadata?.full_name && (
+                            <p className="font-medium">{user.user_metadata.full_name}</p>
+                          )}
+                          {user.email && (
+                            <p className="w-[200px] truncate text-sm text-muted-foreground">
+                              {user.email}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                      <DropdownMenuItem asChild>
+                        <Link href="/dashboard" className="cursor-pointer">
+                          <User className="mr-2 h-4 w-4" />
+                          <span>Dashboard</span>
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem className="cursor-pointer" onClick={handleSignOut}>
+                        <LogOut className="mr-2 h-4 w-4" />
+                        <span>Sign out</span>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                ) : (
+                  /* User is not logged in */
+                  <>
+                    <Button
+                      variant="outline"
+                      className="border-[#F72353] text-[#F72353] hover:bg-[#F72353] hover:text-white bg-transparent dark:bg-transparent dark:border-[#F72353] dark:text-[#F72353] dark:hover:bg-[#F72353] dark:hover:text-white rounded-full px-4"
+                      asChild
+                    >
+                      <Link href="/login">Login</Link>
+                    </Button>
+                    <Button
+                      className="bg-gradient-to-r from-[#F72353] to-[#235EAD] hover:from-[#F72353]/90 hover:to-[#235EAD]/90 text-white rounded-full px-4"
+                      asChild
+                    >
+                      <Link href="/signup">Try Free</Link>
+                    </Button>
+                  </>
+                )}
               </div>
             </div>
 
@@ -166,19 +229,57 @@ export function Header() {
 
             {/* Action Buttons */}
             <div className="p-6 space-y-3 border-t border-gray-200 dark:border-gray-700">
-              <Button
-                variant="outline"
-                className="w-full border-[#F72353] text-[#F72353] hover:bg-[#F72353] hover:text-white bg-transparent dark:bg-transparent dark:border-[#F72353] dark:text-[#F72353] dark:hover:bg-[#F72353] dark:hover:text-white rounded-xl py-3 text-base font-medium"
-                asChild
-              >
-                <Link href="/login">Login</Link>
-              </Button>
-              <Button
-                className="w-full bg-gradient-to-r from-[#F72353] to-[#235EAD] hover:from-[#F72353]/90 hover:to-[#235EAD]/90 text-white rounded-xl py-3 text-base font-medium"
-                asChild
-              >
-                <Link href="/signup">Try Free</Link>
-              </Button>
+              {user ? (
+                <>
+                  <div className="flex items-center space-x-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-xl">
+                    <Avatar className="h-10 w-10">
+                      <AvatarImage src={user.user_metadata?.avatar_url} alt={user.user_metadata?.full_name || user.email} />
+                      <AvatarFallback className="bg-gradient-to-r from-[#F72353] to-[#235EAD] text-white">
+                        {user.user_metadata?.full_name
+                          ? getUserInitials(user.user_metadata.full_name)
+                          : user.email?.charAt(0).toUpperCase() || 'U'
+                        }
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1 min-w-0">
+                      {user.user_metadata?.full_name && (
+                        <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
+                          {user.user_metadata.full_name}
+                        </p>
+                      )}
+                      {user.email && (
+                        <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                          {user.email}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                  <Button
+                    variant="outline"
+                    className="w-full border-[#F72353] text-[#F72353] hover:bg-[#F72353] hover:text-white bg-transparent dark:bg-transparent dark:border-[#F72353] dark:text-[#F72353] dark:hover:bg-[#F72353] dark:hover:text-white rounded-xl py-3 text-base font-medium"
+                    onClick={handleSignOut}
+                  >
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Sign Out
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button
+                    variant="outline"
+                    className="w-full border-[#F72353] text-[#F72353] hover:bg-[#F72353] hover:text-white bg-transparent dark:bg-transparent dark:border-[#F72353] dark:text-[#F72353] dark:hover:bg-[#F72353] dark:hover:text-white rounded-xl py-3 text-base font-medium"
+                    asChild
+                  >
+                    <Link href="/login">Login</Link>
+                  </Button>
+                  <Button
+                    className="w-full bg-gradient-to-r from-[#F72353] to-[#235EAD] hover:from-[#F72353]/90 hover:to-[#235EAD]/90 text-white rounded-xl py-3 text-base font-medium"
+                    asChild
+                  >
+                    <Link href="/signup">Try Free</Link>
+                  </Button>
+                </>
+              )}
             </div>
           </div>
         </div>

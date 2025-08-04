@@ -6,12 +6,15 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Eye, EyeOff, ArrowRight } from "lucide-react"
+import { useAuth } from "@/contexts/AuthContext"
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [animationPhase, setAnimationPhase] = useState(0)
+  const [isLoading, setIsLoading] = useState(false)
+  const { signInWithGoogle, signInWithGithub } = useAuth()
 
   useEffect(() => {
     // Animation sequence timing
@@ -30,118 +33,99 @@ export default function LoginPage() {
     }
   }, [])
 
+  const handleGoogleSignIn = async () => {
+    setIsLoading(true)
+    try {
+      await signInWithGoogle()
+    } catch (error) {
+      console.error('Google sign in error:', error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleGithubSignIn = async () => {
+    setIsLoading(true)
+    try {
+      await signInWithGithub()
+    } catch (error) {
+      console.error('GitHub sign in error:', error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center relative overflow-hidden">
-      {/* PART 1: Left Robot */}
-      <div className="absolute left-8 top-1/2 transform -translate-y-1/2">
-        <div
-          className={`transition-all duration-2000 ease-in-out ${animationPhase === 0 ? "left-[-200px] opacity-0" :
-            animationPhase === 1 ? "opacity-100" :
-              animationPhase === 2 ? "opacity-100" :
-                animationPhase === 3 ? "opacity-100" :
-                  animationPhase === 4 ? "opacity-100" :
-                    "opacity-100"
-            } ${animationPhase >= 3 ? "animate-dance" : ""} ${animationPhase >= 5 ? "animate-jump" : ""}`}
-        >
-          <div className="w-32 h-32 relative">
-            {/* Robot Body */}
-            <div className="absolute bottom-0 w-24 h-24">
-              {/* Main Body */}
-              <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-16 h-20 bg-white rounded-2xl shadow-lg border-2 border-gray-200">
-                {/* Chest Panel */}
-                <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-10 h-12 bg-gradient-to-b from-blue-400 to-blue-600 rounded-xl"></div>
-              </div>
-
-              {/* Head */}
-              <div className="absolute bottom-28 left-1/2 transform -translate-x-1/2 w-16 h-16 bg-white rounded-full shadow-lg border-2 border-gray-200">
-                {/* Face Screen */}
-                <div className="absolute top-1 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-black rounded-full flex items-center justify-center">
-                  {/* Eyes */}
-                  <div className="flex space-x-1">
-                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-ping"></div>
-                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-ping delay-200"></div>
-                  </div>
-                </div>
-                {/* Antenna */}
-                <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-0.5 h-3 bg-blue-500 rounded-full"></div>
-                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-blue-400 rounded-full animate-bounce"></div>
-              </div>
-
-              {/* Arms */}
-              <div className="absolute bottom-16 left-2 w-3 h-8 bg-white rounded-full shadow-lg border border-gray-200 transform rotate-45 origin-bottom">
-                <div className="absolute -top-1 -left-1 w-4 h-4 bg-gray-800 rounded-lg"></div>
-              </div>
-              <div className="absolute bottom-16 right-2 w-3 h-8 bg-white rounded-full shadow-lg border border-gray-200 transform -rotate-45 origin-bottom">
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gray-800 rounded-lg"></div>
-              </div>
-
-              {/* Legs */}
-              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                <div className="w-4 h-8 bg-white rounded-full shadow-lg border border-gray-200">
-                  <div className="absolute bottom-0 w-4 h-3 bg-blue-500 rounded-b-full"></div>
-                </div>
-                <div className="w-4 h-8 bg-white rounded-full shadow-lg border border-gray-200">
-                  <div className="absolute bottom-0 w-4 h-3 bg-blue-500 rounded-b-full"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div className="min-h-screen bg-white dark:bg-gray-900 flex items-center justify-center relative overflow-auto px-4 py-8">
 
       {/* PART 2 & 3: Login Form - Centered */}
-      <div className="w-full max-w-xl mx-auto px-8 z-10">
-        <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 space-y-6">
+      <div className="w-full max-w-lg lg:max-w-xl xl:max-w-2xl mx-auto z-10">
+        <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-xl border border-gray-100 dark:border-gray-700 p-8 space-y-6">
           {/* Header */}
           <div className="text-center space-y-4">
             <h1 className="text-4xl font-bold">
               <span className="text-[#F72353]">Welcome </span>
               <span className="text-[#235EAD]">Back</span>
             </h1>
-            <p className="text-gray-600 text-lg">
+            <p className="text-gray-600 dark:text-gray-300 text-lg">
               Sign In With Your Socials Or Create An Account.
             </p>
           </div>
 
-          {/* Google Sign In */}
-          <Button
-            variant="outline"
-            className="w-full h-12 bg-white border-gray-200 hover:bg-gray-50 text-gray-700 hover:scale-105 transition-all duration-300 hover:shadow-lg"
-          >
-            <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
-              <path
-                fill="#4285F4"
-                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-              />
-              <path
-                fill="#34A853"
-                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-              />
-              <path
-                fill="#FBBC05"
-                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
-              />
-              <path
-                fill="#EA4335"
-                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-              />
-            </svg>
-            <span>continue with google</span>
-          </Button>
+          {/* Social Sign In Buttons */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <Button
+              variant="outline"
+              className="w-full h-12 bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-700 dark:text-white hover:scale-105 transition-all duration-300 hover:shadow-lg"
+              onClick={handleGoogleSignIn}
+              disabled={isLoading}
+            >
+              <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
+                <path
+                  fill="#4285F4"
+                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                />
+                <path
+                  fill="#34A853"
+                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                />
+                <path
+                  fill="#FBBC05"
+                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                />
+                <path
+                  fill="#EA4335"
+                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                />
+              </svg>
+              <span>Google</span>
+            </Button>
+            <Button
+              variant="outline"
+              className="w-full h-12 bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-700 dark:text-white hover:scale-105 transition-all duration-300 hover:shadow-lg"
+              onClick={handleGithubSignIn}
+              disabled={isLoading}
+            >
+              <svg className="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+              </svg>
+              <span>GitHub</span>
+            </Button>
+          </div>
 
           {/* Divider */}
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t border-gray-200" />
+              <span className="w-full border-t border-gray-200 dark:border-gray-600" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="bg-white px-4 text-gray-500">or</span>
+              <span className="bg-white dark:bg-gray-800 px-4 text-gray-500 dark:text-gray-400">or</span>
             </div>
           </div>
 
           {/* Email Input */}
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-gray-900 font-semibold">
+            <Label htmlFor="email" className="text-gray-900 dark:text-white font-semibold">
               Email
             </Label>
             <Input
@@ -150,13 +134,13 @@ export default function LoginPage() {
               placeholder="Enter Your Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="h-12 border-gray-200 focus:border-[#F72353] focus:ring-[#F72353] transition-all duration-300"
+              className="h-12 border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 focus:border-[#F72353] focus:ring-[#F72353] transition-all duration-300"
             />
           </div>
 
           {/* Password Input */}
           <div className="space-y-2">
-            <Label htmlFor="password" className="text-gray-900 font-semibold">
+            <Label htmlFor="password" className="text-gray-900 dark:text-white font-semibold">
               Password
             </Label>
             <div className="relative">
@@ -166,12 +150,12 @@ export default function LoginPage() {
                 placeholder="Enter Your Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="h-12 pr-12 border-gray-200 focus:border-[#F72353] focus:ring-[#F72353] transition-all duration-300"
+                className="h-12 pr-12 border-gray-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 focus:border-[#F72353] focus:ring-[#F72353] transition-all duration-300"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-all duration-300"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-200 transition-all duration-300"
               >
                 {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
               </button>
@@ -195,9 +179,9 @@ export default function LoginPage() {
           </Button>
 
           {/* Terms */}
-          <p className="text-sm text-gray-600 text-center">
-            By Clicking <span className="font-semibold text-gray-900">"Create Account"</span> Or{" "}
-            <span className="font-semibold text-gray-900">"Continue With Google"</span>,
+          <p className="text-sm text-gray-600 dark:text-gray-300 text-center">
+            By Clicking <span className="font-semibold text-gray-900 dark:text-white">"Create Account"</span> Or{" "}
+            <span className="font-semibold text-gray-900 dark:text-white">"Continue With Google"</span>,
             <br />
             You Agree To The Buildro's{" "}
             <Link href="/terms" className="text-[#235EAD] hover:underline">
@@ -209,76 +193,14 @@ export default function LoginPage() {
             </Link>
             .
           </p>
-        </div>
-      </div>
 
-      {/* PART 4: Right Side - Gradient Section + Robot */}
-      <div className="absolute right-8 top-1/2 transform -translate-y-1/2">
-        {/* Top Gradient Section */}
-        <div className="w-64 h-48 bg-gradient-to-b from-[#F72353] to-[#235EAD] rounded-2xl relative mb-8">
-          {/* Sign Up Content */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-white space-y-4">
-            <p className="text-xl font-semibold text-center">Don't have an account?</p>
-            <Button
-              variant="outline"
-              className="bg-white text-gray-800 hover:bg-gray-50 border-white hover:border-gray-50 px-6 py-2 rounded-lg hover:scale-110 transition-all duration-300"
-              asChild
-            >
-              <Link href="/signup">Sign Up</Link>
-            </Button>
-          </div>
-        </div>
-
-        {/* Bottom Robot */}
-        <div
-          className={`transition-all duration-2000 ease-in-out ${animationPhase === 0 ? "right-[-200px] opacity-0" :
-            animationPhase === 1 ? "opacity-100" :
-              animationPhase === 2 ? "opacity-100" :
-                animationPhase === 3 ? "opacity-100" :
-                  animationPhase === 4 ? "right-[-200px] opacity-0" :
-                    "right-[-200px] opacity-0"
-            } ${animationPhase >= 3 ? "animate-dance" : ""}`}
-        >
-          <div className="w-32 h-32 relative">
-            {/* Robot Body */}
-            <div className="absolute bottom-0 w-24 h-24">
-              {/* Main Body */}
-              <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 w-16 h-20 bg-white rounded-2xl shadow-lg border-2 border-gray-200">
-                {/* Chest Panel */}
-                <div className="absolute top-2 left-1/2 transform -translate-x-1/2 w-10 h-12 bg-gradient-to-b from-purple-400 to-purple-600 rounded-xl"></div>
-              </div>
-
-              {/* Head */}
-              <div className="absolute bottom-28 left-1/2 transform -translate-x-1/2 w-16 h-16 bg-white rounded-full shadow-lg border-2 border-gray-200">
-                {/* Face Screen */}
-                <div className="absolute top-1 left-1/2 transform -translate-x-1/2 w-10 h-10 bg-black rounded-full flex items-center justify-center">
-                  {/* Single Eye */}
-                  <div className="w-3 h-3 bg-cyan-400 rounded-full animate-ping"></div>
-                </div>
-                {/* Antenna */}
-                <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-0.5 h-3 bg-purple-500 rounded-full"></div>
-                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-purple-400 rounded-full animate-bounce"></div>
-              </div>
-
-              {/* Arms - Raised */}
-              <div className="absolute bottom-16 left-2 w-3 h-8 bg-white rounded-full shadow-lg border border-gray-200 transform -rotate-45 origin-bottom">
-                <div className="absolute -top-1 -left-1 w-4 h-4 bg-gray-800 rounded-lg"></div>
-              </div>
-              <div className="absolute bottom-16 right-2 w-3 h-8 bg-white rounded-full shadow-lg border border-gray-200 transform rotate-45 origin-bottom">
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gray-800 rounded-lg"></div>
-              </div>
-
-              {/* Legs */}
-              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                <div className="w-4 h-8 bg-white rounded-full shadow-lg border border-gray-200">
-                  <div className="absolute bottom-0 w-4 h-3 bg-purple-500 rounded-b-full"></div>
-                </div>
-                <div className="w-4 h-8 bg-white rounded-full shadow-lg border border-gray-200">
-                  <div className="absolute bottom-0 w-4 h-3 bg-purple-500 rounded-b-full"></div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* Sign Up Link */}
+          <p className="text-center text-sm text-gray-600 dark:text-gray-300">
+            Don't have an account?{" "}
+            <Link href="/signup" className="text-[#F72353] hover:underline font-semibold">
+              Sign up
+            </Link>
+          </p>
         </div>
       </div>
 

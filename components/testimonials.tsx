@@ -10,53 +10,79 @@ interface Testimonial {
   role: string
   avatar: string
   rating: number
+  title: string
   content: string
 }
 
 export function Testimonials() {
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const [currentSlide, setCurrentSlide] = useState(0)
 
   const testimonials: Testimonial[] = [
     {
       id: 1,
-      name: "Mikhail Antimsu",
+      name: "Mikhail Anfimau",
       role: "Happy Client",
-      avatar: "/images/Home/banerbg.png",
-      rating: 5,
-      content: "buildro.ai transformed our business. We went from idea to live product in just 2 days. The AI understood exactly what we needed and delivered beyond our expectations."
+      avatar: "/images/Home/Ellipse 543.png",
+      rating: 4,
+      title: "Best services",
+      content: "This job portal made my job search so much easier! The interface is simple, and I found relevant job listings quickly. Within weeks, I landed a great opportunity with a top company. Highly..."
     },
     {
       id: 2,
-      name: "Sarah Johnson",
-      role: "Product Manager",
-      avatar: "/images/Home/banerbg.png",
-      rating: 5,
-      content: "Incredible platform! The templates are beautiful and the AI is incredibly smart. We saved months of development time and got a professional result."
+      name: "Mikhail Anfimau",
+      role: "Happy Client",
+      avatar: "/images/Home/Ellipse 543.png",
+      rating: 4,
+      title: "Easy to Access",
+      content: "This job portal made my job search so much easier! The interface is simple, and I found relevant job listings quickly. Within weeks, I landed a great opportunity with a top company. Highly..."
     },
     {
       id: 3,
-      name: "David Chen",
-      role: "Startup Founder",
-      avatar: "/images/Home/banerbg.png",
-      rating: 5,
-      content: "This is exactly what we needed. No coding required, just describe what you want and watch the magic happen. Highly recommended!"
+      name: "Mikhail Anfimau",
+      role: "Happy Client",
+      avatar: "/images/Home/Ellipse 543.png",
+      rating: 4,
+      title: "Great",
+      content: "This job portal made my job search so much easier! The interface is simple, and I found relevant job listings quickly. Within weeks, I landed a great opportunity with a top company. Highly..."
     },
     {
       id: 4,
+      name: "Sarah Johnson",
+      role: "Product Manager",
+      avatar: "/images/Home/Ellipse 543.png",
+      rating: 4,
+      title: "Amazing Platform",
+      content: "The AI understood exactly what we needed and delivered beyond our expectations. We saved months of development time and got a professional result. Highly recommended!"
+    },
+    {
+      id: 5,
+      name: "David Chen",
+      role: "Startup Founder",
+      avatar: "/images/Home/Ellipse 543.png",
+      rating: 4,
+      title: "Game Changer",
+      content: "This is exactly what we needed. No coding required, just describe what you want and watch the magic happen. The quality of the generated code is outstanding."
+    },
+    {
+      id: 6,
       name: "Emily Rodriguez",
       role: "Designer",
-      avatar: "/images/Home/banerbg.png",
-      rating: 5,
-      content: "The quality of the generated code is outstanding. Clean, responsive, and follows best practices. This tool is a game-changer."
+      avatar: "/images/Home/Ellipse 543.png",
+      rating: 4,
+      title: "Perfect Solution",
+      content: "Clean, responsive, and follows best practices. This tool is a game-changer for designers and developers alike. The templates are beautiful and the AI is incredibly smart."
     }
   ]
 
-  const nextTestimonial = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length)
+  const totalSlides = Math.ceil(testimonials.length / 3)
+
+  const getCurrentTestimonials = () => {
+    const startIndex = currentSlide * 3
+    return testimonials.slice(startIndex, startIndex + 3)
   }
 
-  const prevTestimonial = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+  const handleDotClick = (slideIndex: number) => {
+    setCurrentSlide(slideIndex)
   }
 
   return (
@@ -68,23 +94,20 @@ export function Testimonials() {
             Testimonial
           </h2>
           <div className="flex items-center justify-center gap-2 mb-6">
-            <div className="w-8 h-0.5 bg-gradient-to-r from-blue-500 to-pink-500"></div>
-            <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-            <div className="w-2 h-2 bg-pink-500 rounded-full"></div>
+            <div className="w-8 h-0.5 bg-gradient-to-r from-red-500 to-blue-500"></div>
+            <div className="w-2 h-2 bg-red-500 rounded-full"></div>
             <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-            <div className="w-8 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500"></div>
+            <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+            <div className="w-8 h-0.5 bg-gradient-to-r from-red-500 to-blue-500"></div>
           </div>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            See what our customers are saying about their experience with buildro.ai.
-          </p>
         </div>
 
         {/* Testimonials */}
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {testimonials.slice(currentIndex, currentIndex + 2).map((testimonial) => (
-              <Card key={testimonial.id} className="hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                <CardContent className="p-8">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {getCurrentTestimonials().map((testimonial) => (
+              <Card key={testimonial.id} className="hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 bg-white border-0 rounded-2xl">
+                <CardContent className="p-6">
                   {/* Rating */}
                   <div className="flex items-center gap-1 mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
@@ -92,19 +115,26 @@ export function Testimonials() {
                     ))}
                   </div>
 
+                  {/* Title */}
+                  <h3 className="text-lg font-bold text-gray-900 mb-3">
+                    {testimonial.title}
+                  </h3>
+
                   {/* Content */}
-                  <blockquote className="text-gray-700 mb-6 italic">
-                    "{testimonial.content}"
-                  </blockquote>
+                  <p className="text-sm text-gray-600 mb-6 leading-relaxed">
+                    {testimonial.content}
+                  </p>
 
                   {/* Author */}
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-pink-500 flex items-center justify-center text-white font-semibold text-lg">
-                      {testimonial.name.charAt(0)}
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center">
+                      {/* <div className="w-8 h-8 rounded-full bg-gray-400"></div> */}
+
+                      <img src={testimonial.avatar} alt="avatar" />
                     </div>
                     <div>
-                      <div className="font-semibold text-gray-900">{testimonial.name}</div>
-                      <div className="text-sm text-gray-600">{testimonial.role}</div>
+                      <div className="font-semibold text-gray-900 text-sm">{testimonial.name}</div>
+                      <div className="text-xs text-gray-600">{testimonial.role}</div>
                     </div>
                   </div>
                 </CardContent>
@@ -112,51 +142,18 @@ export function Testimonials() {
             ))}
           </div>
 
-          {/* Navigation Dots */}
+          {/* Pagination Dots */}
           <div className="flex justify-center items-center gap-2 mt-8">
-            {testimonials.map((_, index) => (
+            {[...Array(totalSlides)].map((_, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentIndex(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentIndex 
-                    ? 'bg-blue-600 w-8' 
-                    : 'bg-gray-300 hover:bg-gray-400'
-                }`}
+                onClick={() => handleDotClick(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentSlide
+                  ? 'bg-red-500'
+                  : 'bg-gray-300 hover:bg-gray-400'
+                  }`}
               />
             ))}
-          </div>
-
-          {/* Navigation Arrows */}
-          <div className="flex justify-center items-center gap-4 mt-6">
-            <button
-              onClick={prevTestimonial}
-              className="w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-blue-500 hover:text-blue-500 transition-all duration-300"
-            >
-              ←
-            </button>
-            <button
-              onClick={nextTestimonial}
-              className="w-10 h-10 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-blue-500 hover:text-blue-500 transition-all duration-300"
-            >
-              →
-            </button>
-          </div>
-        </div>
-
-        {/* Stats */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-          <div className="text-center">
-            <div className="text-3xl font-bold text-gray-900 mb-2">98%</div>
-            <div className="text-gray-600">Customer Satisfaction</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-gray-900 mb-2">4.9/5</div>
-            <div className="text-gray-600">Average Rating</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-gray-900 mb-2">10K+</div>
-            <div className="text-gray-600">Happy Customers</div>
           </div>
         </div>
       </div>

@@ -122,16 +122,13 @@ export function Hero() {
             <div className="space-y-6">
               <div className="space-y-6">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
-                  CREATE WEBSITES & DASHBOARDS WITH
-                  <br />
+
                   <span className="bg-gradient-to-r from-[#F72353] to-[#235EAD] bg-clip-text text-transparent">
-                    A SIMPLE PROMPT
+                    Buildro AI
                   </span>
                 </h1>
                 <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-                  From Simple Prompts, Buildro Designs Full Websites And Dashboards That
-                  <br />
-                  Are Clean, Responsive, And Ready To Use.
+                  Turn a Single Prompt into Full Websites & Dashboards
                 </p>
               </div>
 
@@ -153,7 +150,7 @@ export function Hero() {
                 </div>
 
                 {/* Clean Prompt Interface */}
-                <div className="flex-1 max-w-4xl relative z-10">
+                <div className="flex-1 w-full md:w-[1200px] max-w-4xl relative z-10">
                   <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-6">
                     <div className="space-y-4">
                       <div className="relative">
@@ -294,6 +291,7 @@ export function Hero() {
                     </div>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>
