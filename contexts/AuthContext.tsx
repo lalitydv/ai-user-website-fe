@@ -21,6 +21,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+        // Only initialize auth if Supabase client is available
+        if (!supabase) {
+            setLoading(false)
+            return
+        }
+
         // Get initial session
         supabase.auth.getSession().then(({ data: { session } }) => {
             setSession(session)
@@ -41,6 +47,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }, [])
 
     const signInWithGoogle = async () => {
+        if (!supabase) {
+            console.error('Supabase client not initialized')
+            return
+        }
+
         try {
             const { error } = await supabase.auth.signInWithOAuth({
                 provider: 'google',
@@ -49,7 +60,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                     queryParams: {
                         access_type: 'offline',
                         prompt: 'consent',
-                        client_id: googleClientId
+                        ...(googleClientId && { client_id: googleClientId })
                     }
                 }
             })
@@ -60,6 +71,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     const signInWithGithub = async () => {
+        if (!supabase) {
+            console.error('Supabase client not initialized')
+            return
+        }
+
         try {
             const { error } = await supabase.auth.signInWithOAuth({
                 provider: 'github',
@@ -67,7 +83,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                     redirectTo: `${window.location.origin}/auth/callback`,
                     scopes: 'user:email',
                     queryParams: {
-                        client_id: githubClientId
+                        ...(githubClientId && { client_id: githubClientId })
                     }
                 }
             })
@@ -78,6 +94,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     const signOut = async () => {
+        if (!supabase) {
+            console.error('Supabase client not initialized')
+            return
+        }
+
         try {
             const { error } = await supabase.auth.signOut()
             if (error) throw error

@@ -15,7 +15,7 @@ export default function HomePage() {
       <Pricing />
       <Process />
       <Testimonials />
-     \
+     
     </main>
   )
 }

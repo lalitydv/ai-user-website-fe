@@ -49,9 +49,14 @@ export default function TestAuthPage() {
 
         // Test 2: Supabase Connection
         try {
-            const { data, error } = await supabase.auth.getSession()
-            results.supabaseConnection = !error
-            console.log("Supabase Connection Test:", { data, error })
+            if (!supabase) {
+                results.supabaseConnection = false
+                console.log("Supabase Connection Test: Client not initialized")
+            } else {
+                const { data, error } = await supabase.auth.getSession()
+                results.supabaseConnection = !error
+                console.log("Supabase Connection Test:", { data, error })
+            }
         } catch (error) {
             console.error("Supabase Connection Test Failed:", error)
             results.supabaseConnection = false
