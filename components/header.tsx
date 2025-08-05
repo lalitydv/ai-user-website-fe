@@ -63,16 +63,16 @@ export function Header() {
             {/* Right side content */}
             <div className="flex items-center space-x-4">
               <div className="hidden md:flex items-center space-x-6">
-                <Link href="#community" className="text-gray-700 dark:text-gray-300 hover:text-[#F72353] dark:hover:text-[#F72353] transition-colors">
+                <Link href="/community" className="text-gray-700 dark:text-gray-300 hover:text-[#F72353] dark:hover:text-[#F72353] transition-colors">
                   Community
                 </Link>
-                <Link href="#pricing" className="text-gray-700 dark:text-gray-300 hover:text-[#F72353] dark:hover:text-[#F72353] transition-colors">
+                <Link href="/pricing" className="text-gray-700 dark:text-gray-300 hover:text-[#F72353] dark:hover:text-[#F72353] transition-colors">
                   Pricing
                 </Link>
-                <Link href="#tutorial" className="text-gray-700 dark:text-gray-300 hover:text-[#F72353] dark:hover:text-[#F72353] transition-colors">
+                <Link href="/tutorial" className="text-gray-700 dark:text-gray-300 hover:text-[#F72353] dark:hover:text-[#F72353] transition-colors">
                   Tutorial
                 </Link>
-                <Link href="#story" className="text-gray-700 dark:text-gray-300 hover:text-[#F72353] dark:hover:text-[#F72353] transition-colors">
+                <Link href="/our-story" className="text-gray-700 dark:text-gray-300 hover:text-[#F72353] dark:hover:text-[#F72353] transition-colors">
                   Our Story
                 </Link>
               </div>
@@ -193,7 +193,7 @@ export function Header() {
             <nav className="flex-1 px-6 py-6">
               <div className="space-y-2">
                 <Link
-                  href="#community"
+                  href="/community"
                   className="flex items-center py-4 px-4 text-gray-700 dark:text-gray-300 hover:text-[#F72353] dark:hover:text-[#F72353] hover:bg-gray-50 dark:hover:bg-gray-800 rounded-xl transition-all duration-200 group"
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -201,7 +201,7 @@ export function Header() {
                   <div className="ml-auto w-2 h-2 bg-[#F72353] rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </Link>
                 <Link
-                  href="#pricing"
+                  href="/pricing"
                   className="flex items-center py-4 px-4 text-gray-700 dark:text-gray-300 hover:text-[#F72353] dark:hover:text-[#F72353] hover:bg-gray-50 dark:hover:bg-gray-800 rounded-xl transition-all duration-200 group"
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -209,7 +209,7 @@ export function Header() {
                   <div className="ml-auto w-2 h-2 bg-[#F72353] rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </Link>
                 <Link
-                  href="#tutorial"
+                  href="/tutorial"
                   className="flex items-center py-4 px-4 text-gray-700 dark:text-gray-300 hover:text-[#F72353] dark:hover:text-[#F72353] hover:bg-gray-50 dark:hover:bg-gray-800 rounded-xl transition-all duration-200 group"
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -217,7 +217,7 @@ export function Header() {
                   <div className="ml-auto w-2 h-2 bg-[#F72353] rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </Link>
                 <Link
-                  href="#story"
+                  href="/our-story"
                   className="flex items-center py-4 px-4 text-gray-700 dark:text-gray-300 hover:text-[#F72353] dark:hover:text-[#F72353] hover:bg-gray-50 dark:hover:bg-gray-800 rounded-xl transition-all duration-200 group"
                   onClick={() => setIsMenuOpen(false)}
                 >

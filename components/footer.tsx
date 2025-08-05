@@ -76,28 +76,28 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Socials */}
+          {/* Pages */}
           <div>
-            <h4 className="font-semibold mb-4 text-white">Socials</h4>
+            <h4 className="font-semibold mb-4 text-white">Pages</h4>
             <ul className="space-y-2 text-gray-300">
               <li>
-                <Link href="#" className="hover:text-blue-500 transition-colors">
-                  Facebook
+                <Link href="/community" className="hover:text-blue-500 transition-colors">
+                  Community
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-blue-500 transition-colors">
-                  LinkedIn
+                <Link href="/pricing" className="hover:text-blue-500 transition-colors">
+                  Pricing
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-blue-500 transition-colors">
-                  Instagram
+                <Link href="/tutorial" className="hover:text-blue-500 transition-colors">
+                  Tutorial
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-blue-500 transition-colors">
-                  Twitter
+                <Link href="/our-story" className="hover:text-blue-500 transition-colors">
+                  Our Story
                 </Link>
               </li>
             </ul>

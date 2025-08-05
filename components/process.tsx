@@ -79,21 +79,21 @@ export function Process() {
                     <div className="flex items-center justify-center">
 
 
-                   
-                    <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm">
-                      <span className={`text-3xl ${step.iconColor}`}>
-                        {step.icon}
-                      </span>
+
+                      <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm">
+                        <span className={`text-3xl ${step.iconColor}`}>
+                          {step.icon}
+                        </span>
+                      </div>
+
+                      {/* Content */}
+                      <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                        {step.title}
+                      </h3>
                     </div>
 
-                    {/* Content */}
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                      {step.title}
-                    </h3>
-                    </div>
-
-                      {/* Card Bottom Line with Dots */}
-                      <div className="relative">
+                    {/* Card Bottom Line with Dots */}
+                    <div className="relative">
                       <div className="h-0.5 bg-gradient-to-r from-red-500 to-blue-500 rounded-full"></div>
                       <div className="absolute -right-1 top-1/2 w-2 h-2 bg-blue-500 rounded-full transform -translate-y-1/2"></div>
                       <div className="absolute -right-3 top-1/2 w-2 h-2 bg-blue-500 rounded-full transform -translate-y-1/2"></div>
@@ -102,7 +102,7 @@ export function Process() {
                       {step.description}
                     </p>
 
-                  
+
                   </CardContent>
                 </Card>
               </div>
@@ -111,7 +111,7 @@ export function Process() {
         </div>
 
         {/* CTA Section */}
-        <div className="text-center mt-16">
+        {/* <div className="text-center mt-16">
           <div className="bg-gradient-to-r from-blue-50 to-pink-50 rounded-2xl p-8 max-w-2xl mx-auto">
             <h3 className="text-2xl font-bold text-gray-900 mb-4">
               Ready to build your next big idea?
@@ -128,7 +128,7 @@ export function Process() {
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   )

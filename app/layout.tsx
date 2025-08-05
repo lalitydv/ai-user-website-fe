@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { Header } from "@/components/header"
+import { Footer } from "@/components/footer"
 import { ThemeProvider } from "@/components/theme-provider"
 import { AuthProvider } from "@/contexts/AuthContext"
 
@@ -32,6 +33,7 @@ export default function RootLayout({
           <AuthProvider>
             <Header />
             {children}
+            <Footer />
           </AuthProvider>
         </ThemeProvider>
       </body>
