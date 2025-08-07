@@ -3,31 +3,25 @@
 import Link from "next/link"
 import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react"
 import { useState } from "react"
+import Image from "next/image"
 
 export function Footer() {
-  const [logoError, setLogoError] = useState(false)
   const [videoError, setVideoError] = useState(false)
+  const [logoError, setLogoError] = useState(false)
 
   return (
     <footer className="relative bg-gray-900 text-white overflow-hidden">
-      {/* Video Background */}
-      {!videoError && (
-        <div className="absolute inset-0 z-0">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover"
-            onError={() => setVideoError(true)}
-          >
-            <source src="/videos/f215500.mp4" type="video/mp4" />
-            <source src="/videos/215500.mp4" type="video/webm" />
-          </video>
-          {/* High opacity overlay */}
-          <div className="absolute inset-0 bg-black/80"></div>
-        </div>
-      )}
+      {/* Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover z-0"
+        onError={() => setVideoError(true)}
+      >
+        <source src="/videos/background.mp4" type="video/mp4" />
+      </video>
 
       {/* Fallback CSS Gradient Animation */}
       {videoError && (
@@ -44,11 +38,14 @@ export function Footer() {
           <div className="space-y-4">
             <Link href="/" className="inline-block">
               {!logoError ? (
-                <img
+                <Image
                   src="/images/Logo/buildro-logo.png"
                   alt="buildro.ai Logo"
+                  width={144}
+                  height={48}
                   className="h-12 w-auto"
                   onError={() => setLogoError(true)}
+                  priority
                 />
               ) : (
                 <div className="h-12 px-6 bg-gradient-to-r from-blue-600 to-pink-600 rounded-lg flex items-center justify-center text-white font-bold text-xl">

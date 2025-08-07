@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Heart, ChevronDown } from "lucide-react"
 import { useState } from "react"
+import Image from "next/image"
 
 interface TemplateCard {
   id: number
@@ -137,16 +138,13 @@ export function Community() {
                 <CardContent className="p-0">
                   {/* Image */}
                   <div className="relative overflow-hidden">
-                    <img
+                    <Image
                       src={template.image}
                       alt={template.title}
+                      width={400}
+                      height={224}
                       className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
-                      onError={(e) => {
-                        // Fallback to a gradient background if image fails to load
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                        target.parentElement!.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-                      }}
+                      priority
                     />
                     <div className="absolute top-3 right-3">
                       <Button
@@ -169,15 +167,12 @@ export function Community() {
                     {/* Author Information */}
                     <div className="flex items-center mb-4">
                       <div className="w-6 h-6 rounded-full bg-gray-300 mr-2 overflow-hidden">
-                        <img
+                        <Image
                           src={template.author.avatar}
                           alt={template.author.name}
+                          width={24}
+                          height={24}
                           className="w-full h-full object-cover"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.style.display = 'none';
-                            target.parentElement!.style.background = '#9CA3AF';
-                          }}
                         />
                       </div>
                       <span className="text-sm text-gray-600">{template.author.name}</span>

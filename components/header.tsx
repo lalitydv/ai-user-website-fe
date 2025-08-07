@@ -8,6 +8,7 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { useAuth } from "@/contexts/AuthContext"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import Image from "next/image"
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -47,11 +48,14 @@ export function Header() {
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center space-x-3">
               {!logoError ? (
-                <img
+                <Image
                   src="/images/Logo/buildro-logo.png"
                   alt="buildro.ai Logo"
-                  className="h-10 w-auto"
+                  width={120}
+                  height={40}
+                  className="h-10 w-auto object-contain"
                   onError={() => setLogoError(true)}
+                  priority
                 />
               ) : (
                 <div className="h-10 px-4 bg-gradient-to-r from-blue-600 to-pink-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">
@@ -168,18 +172,21 @@ export function Header() {
             <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
               <div className="flex items-center space-x-3">
                 {!logoError ? (
-                  <img
-                    src="/images/Logo/shinecoderlogo.svg"
+                  <Image
+                    src="/images/Logo/buildro-logo.png"
                     alt="buildro.ai Logo"
+                    width={120}
+                    height={40}
                     className="h-8 w-auto"
                     onError={() => setLogoError(true)}
+                    priority
                   />
                 ) : (
                   <div className="h-8 px-3 bg-gradient-to-r from-blue-600 to-pink-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">
                     buildro.ai
                   </div>
                 )}
-                <span className="text-lg font-semibold text-gray-800 dark:text-gray-200">Menu</span>
+                {/* <span className="text-lg font-semibold text-gray-800 dark:text-gray-200">Menu</span> */}
               </div>
               <button
                 onClick={() => setIsMenuOpen(false)}

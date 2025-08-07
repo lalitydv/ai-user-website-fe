@@ -3,6 +3,7 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Star } from "lucide-react"
 import { useState } from "react"
+import Image from "next/image"
 
 interface Testimonial {
   id: number
@@ -20,47 +21,47 @@ export function Testimonials() {
   const testimonials: Testimonial[] = [
     {
       id: 1,
-      name: "Mikhail Anfimau",
-      role: "Happy Client",
-      avatar: "/images/Home/Ellipse 543.png",
-      rating: 4,
-      title: "Best services",
-      content: "This job portal made my job search so much easier! The interface is simple, and I found relevant job listings quickly. Within weeks, I landed a great opportunity with a top company. Highly..."
-    },
-    {
-      id: 2,
-      name: "Mikhail Anfimau",
-      role: "Happy Client",
-      avatar: "/images/Home/Ellipse 543.png",
-      rating: 4,
-      title: "Easy to Access",
-      content: "This job portal made my job search so much easier! The interface is simple, and I found relevant job listings quickly. Within weeks, I landed a great opportunity with a top company. Highly..."
-    },
-    {
-      id: 3,
-      name: "Mikhail Anfimau",
-      role: "Happy Client",
-      avatar: "/images/Home/Ellipse 543.png",
-      rating: 4,
-      title: "Great",
-      content: "This job portal made my job search so much easier! The interface is simple, and I found relevant job listings quickly. Within weeks, I landed a great opportunity with a top company. Highly..."
-    },
-    {
-      id: 4,
       name: "Sarah Johnson",
       role: "Product Manager",
       avatar: "/images/Home/Ellipse 543.png",
+      rating: 5,
+      title: "Amazing Experience",
+      content: "Buildro AI has completely transformed how we approach web development. What used to take weeks now takes minutes. The quality and attention to detail is incredible."
+    },
+    {
+      id: 2,
+      name: "Michael Chen",
+      role: "Startup Founder",
+      avatar: "/images/Home/Ellipse 543.png",
+      rating: 5,
+      title: "Game Changer",
+      content: "As a non-technical founder, this tool has been a lifesaver. I can now create professional websites and dashboards without any coding knowledge."
+    },
+    {
+      id: 3,
+      name: "David Wilson",
+      role: "Freelancer",
+      avatar: "/images/Home/Ellipse 543.png",
       rating: 4,
-      title: "Amazing Platform",
-      content: "The AI understood exactly what we needed and delivered beyond our expectations. We saved months of development time and got a professional result. Highly recommended!"
+      title: "Incredible Tool",
+      content: "The speed and quality of the generated code is outstanding. It's like having a senior developer on your team. Highly recommended!"
+    },
+    {
+      id: 4,
+      name: "Lisa Thompson",
+      role: "Marketing Director",
+      avatar: "/images/Home/Ellipse 543.png",
+      rating: 5,
+      title: "Perfect for Marketing",
+      content: "We use this for creating landing pages and marketing dashboards. The results are always professional and conversion-focused."
     },
     {
       id: 5,
-      name: "David Chen",
-      role: "Startup Founder",
+      name: "Alex Martinez",
+      role: "Agency Owner",
       avatar: "/images/Home/Ellipse 543.png",
       rating: 4,
-      title: "Game Changer",
+      title: "Saves Time & Money",
       content: "This is exactly what we needed. No coding required, just describe what you want and watch the magic happen. The quality of the generated code is outstanding."
     },
     {
@@ -127,10 +128,14 @@ export function Testimonials() {
 
                   {/* Author */}
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center">
-                      {/* <div className="w-8 h-8 rounded-full bg-gray-400"></div> */}
-
-                      <img src={testimonial.avatar} alt="avatar" />
+                    <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden">
+                      <Image
+                        src={testimonial.avatar}
+                        alt="avatar"
+                        width={40}
+                        height={40}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     <div>
                       <div className="font-semibold text-gray-900 text-sm">{testimonial.name}</div>

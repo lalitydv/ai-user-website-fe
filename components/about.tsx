@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { CheckCircle } from "lucide-react"
+import Image from "next/image"
 
 const features = [
   "Licensed and fully insured",
@@ -40,9 +41,11 @@ export function About() {
           </div>
 
           <div className="relative">
-            <img
+            <Image
               src="/placeholder.svg?height=500&width=600"
               alt="Construction team"
+              width={600}
+              height={500}
               className="w-full h-auto rounded-2xl shadow-xl"
             />
             <div className="absolute -bottom-6 -right-6 bg-yellow-500 text-white p-6 rounded-2xl">

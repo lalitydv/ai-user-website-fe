@@ -10,7 +10,8 @@ import { Paperclip, Globe, Send, Plus, Check, AlertCircle } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import Typewriter from 'typewriter-effect'
-
+import { useRouter } from "next/navigation"
+import Image from "next/image"
 
 export function Hero() {
   const [prompt, setPrompt] = useState("")
@@ -24,6 +25,7 @@ export function Hero() {
   const [isValidUrl, setIsValidUrl] = useState(false)
   const [isFocused, setIsFocused] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const router = useRouter()
 
   // Typewriter effect prompts
   const prompts = [
@@ -98,8 +100,16 @@ export function Hero() {
   const handleFigmaImport = () => {
     if (isValidUrl) {
       console.log("Importing from Figma:", figmaUrl)
-      setShowFigmaDialog(false)
-      setFigmaUrl("")
+    }
+  }
+
+  // Direct prompt submission - no login required
+  const handleSendPrompt = () => {
+    if (prompt.trim()) {
+      // Navigate directly to generating page with prompt
+      const searchParams = new URLSearchParams()
+      searchParams.set('prompt', prompt)
+      router.push(`/generating?${searchParams.toString()}`)
     }
   }
 
@@ -107,11 +117,10 @@ export function Hero() {
     <section
       className="min-h-screen flex items-center justify-center relative bg-cover bg-center bg-no-repeat"
       style={{
-        backgroundImage: 'url(/images/Home/banerbg.png)'
+        backgroundImage: 'url(/images/Home/banerbg.png)',
+        backgroundColor: '#f8fafc' // Fallback color
       }}
     >
-
-
       {/* Overlay for better text readability */}
       <div className="absolute inset-0 bg-white/5 dark:bg-black/20"></div>
 
@@ -122,9 +131,17 @@ export function Hero() {
             <div className="space-y-6">
               <div className="space-y-6">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
-
                   <span className="bg-gradient-to-r from-[#F72353] to-[#235EAD] bg-clip-text text-transparent">
-                    Buildro AI
+                    <div className="flex justify-center items-center">
+                      <Image
+                        src="/images/Logo/buil-ai.png"
+                        alt="buildro.ai Logo"
+                        width={200}
+                        height={40}
+                        className="h-10 w-auto object-contain"
+                        priority
+                      />
+                    </div>
                   </span>
                 </h1>
                 <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
@@ -134,7 +151,7 @@ export function Hero() {
 
               <div className="relative flex justify-center items-center space-x-8 mt-12">
                 {/* Animated decorative background circles */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-10">
                   {/* Large animated circles covering full screen */}
                   <div className="w-screen h-screen rounded-full border border-gradient-to-r from-[#235EAD]/20 to-[#F72353]/20 bg-gradient-to-r from-[#235EAD]/8 to-[#F72353]/8 animate-pulse"></div>
                   <div className="absolute w-[90vw] h-[90vw] rounded-full border border-gradient-to-r from-[#235EAD]/15 to-[#F72353]/15 bg-gradient-to-r from-[#235EAD]/6 to-[#F72353]/6 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
@@ -188,7 +205,7 @@ export function Hero() {
                           }}
                         />
                         {!isFocused && (
-                          <div className="absolute inset-0 pointer-events-none flex items-center px-4 py-1 text-gray-500 dark:text-gray-400">
+                          <div className="absolute inset-0 pointer-events-none flex items-start px-4 py-4 text-gray-500 dark:text-gray-400">
                             <Typewriter
                               options={{
                                 strings: prompts,
@@ -283,7 +300,9 @@ export function Hero() {
 
                         <Button
                           size="sm"
-                          className="bg-gradient-to-r from-[#F72353] to-[#235EAD] hover:from-[#F72353]/90 hover:to-[#235EAD]/90 text-white rounded-full p-3"
+                          onClick={handleSendPrompt}
+                          disabled={!prompt.trim()}
+                          className="bg-gradient-to-r from-[#F72353] to-[#235EAD] hover:from-[#F72353]/90 hover:to-[#235EAD]/90 text-white rounded-full p-3 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           <Send className="h-4 w-4" />
                         </Button>
@@ -291,7 +310,6 @@ export function Hero() {
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
