@@ -20,6 +20,10 @@
         {
           "key": "Access-Control-Allow-Origin",
           "value": "*"
+        },
+        {
+          "key": "Content-Type",
+          "value": "image/*"
         }
       ]
     },
@@ -67,5 +71,7 @@
       "source": "/videos/(.*)",
       "destination": "/videos/$1"
     }
-  ]
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
 } 

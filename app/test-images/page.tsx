@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
+import { DebugImages } from '@/components/debug-images'
+import { SimpleImageTest } from '@/components/simple-image-test'
 
 export default function TestImagesPage() {
     const [imageErrors, setImageErrors] = useState<{ [key: string]: boolean }>({})
@@ -202,7 +204,7 @@ export default function TestImagesPage() {
                 </div>
 
                 {/* Network Test */}
-                <div className="bg-white p-6 rounded-lg shadow-md">
+                <div className="bg-white p-6 rounded-lg shadow-md mb-8">
                     <h2 className="text-2xl font-semibold mb-4">Network Test</h2>
                     <div className="space-y-4">
                         <button
@@ -244,6 +246,16 @@ export default function TestImagesPage() {
                         </p>
                     </div>
                 </div>
+            </div>
+
+            {/* Debug Images Component */}
+            <div className="mt-8">
+                <DebugImages />
+            </div>
+
+            {/* Simple Image Test Component */}
+            <div className="mt-8">
+                <SimpleImageTest />
             </div>
         </div>
     )
