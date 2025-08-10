@@ -17,7 +17,7 @@ const Aivideo = () => {
             </video>
 
             {/* Single Image at Bottom Center */}
-            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 z-10">
+            <div className="absolute bottom-0 left-0 center z-10">
                 <Image
                     src="/images/Home/ai-image.png"
                     alt="AI and Human"
