@@ -93,29 +93,29 @@ export function Pricing() {
   ]
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white dark:bg-gray-900">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-16">
           <div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
               Plans & Billing
             </h2>
             <div className="flex items-center gap-2">
-              <div className="w-8 h-0.5 bg-gradient-to-r from-red-500 to-blue-500"></div>
-              <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-              <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-              <div className="w-8 h-0.5 bg-gradient-to-r from-red-500 to-blue-500"></div>
+              <div className="w-8 h-0.5 bg-gradient-to-r from-brand-pink to-brand-blue"></div>
+              <div className="w-2 h-2 bg-brand-pink rounded-full"></div>
+              <div className="w-2 h-2 bg-brand-blue rounded-full"></div>
+              <div className="w-2 h-2 bg-brand-pink rounded-full"></div>
+              <div className="w-8 h-0.5 bg-gradient-to-r from-brand-pink to-brand-blue"></div>
             </div>
           </div>
 
           {/* Pricing Toggle */}
-          <div className="flex items-center gap-2 bg-gradient-to-r from-pink-100 to-blue-100 rounded-full p-1 mt-6 lg:mt-0 border border-pink-200">
+          <div className="flex items-center gap-2 bg-gradient-to-r from-brand-pink/10 to-brand-blue/10 rounded-full p-1 mt-6 lg:mt-0 border border-brand-pink/20">
             <button
               onClick={() => setIsYearly(false)}
               className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${!isYearly
-                ? 'bg-gradient-to-r from-pink-500 to-blue-500 text-white shadow-lg'
+                ? 'bg-gradient-to-r from-brand-pink to-brand-blue text-white shadow-lg'
                 : 'text-gray-600 hover:text-gray-900 hover:bg-white/50'
                 }`}
             >
@@ -125,7 +125,7 @@ export function Pricing() {
             <button
               onClick={() => setIsYearly(true)}
               className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${isYearly
-                ? 'bg-gradient-to-r from-pink-500 to-blue-500 text-white shadow-lg'
+                ? 'bg-gradient-to-r from-brand-pink to-brand-blue text-white shadow-lg'
                 : 'text-gray-600 hover:text-gray-900 hover:bg-white/50'
                 }`}
             >
@@ -141,7 +141,7 @@ export function Pricing() {
             <div key={tier.name} className="relative">
               {tier.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
-                  <Badge className="bg-blue-600 text-white px-4 py-1 rounded-full">
+                  <Badge className="bg-brand-blue text-white px-4 py-1 rounded-full">
                     Most Popular
                   </Badge>
                 </div>
@@ -149,16 +149,16 @@ export function Pricing() {
 
               {/* Gradient border wrapper for Professional card */}
               {tier.popular ? (
-                <div className="relative rounded-2xl bg-gradient-to-r from-pink-500 to-blue-500 p-0.5">
-                  <Card className="relative bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+                <div className="relative rounded-2xl bg-gradient-to-r from-brand-pink to-brand-blue p-0.5">
+                  <Card className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
                     <CardHeader className="text-center pb-6">
-                      <h3 className="text-2xl font-bold text-gray-900 mb-2">{tier.name}</h3>
-                      <p className="text-gray-600 text-sm mb-4">{tier.description}</p>
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{tier.name}</h3>
+                      <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">{tier.description}</p>
                       <div className="mt-4">
-                        <span className="text-4xl font-bold text-gray-900">
+                        <span className="text-4xl font-bold text-gray-900 dark:text-white">
                           {isYearly ? tier.price.yearly : tier.price.monthly}
                         </span>
-                        <span className="text-gray-500 ml-2">
+                        <span className="text-gray-500 dark:text-gray-400 ml-2">
                           / {isYearly ? 'Year' : 'Month'}
                         </span>
                       </div>
@@ -169,28 +169,28 @@ export function Pricing() {
                         {/* Included Features */}
                         {tier.features.included.map((feature, featureIndex) => (
                           <div key={featureIndex} className="flex items-center gap-3">
-                            <div className="w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center">
-                              <Check className="w-3 h-3 text-blue-600" />
+                            <div className="w-5 h-5 bg-brand-blue/10 rounded-full flex items-center justify-center">
+                              <Check className="w-3 h-3 text-brand-blue" />
                             </div>
-                            <span className="text-gray-700 text-sm">{feature}</span>
+                            <span className="text-gray-700 dark:text-gray-200 text-sm">{feature}</span>
                           </div>
                         ))}
 
                         {/* Excluded Features */}
                         {tier.features.excluded.map((feature, featureIndex) => (
                           <div key={featureIndex} className="flex items-center gap-3">
-                            <div className="w-5 h-5 bg-red-100 rounded-full flex items-center justify-center">
-                              <X className="w-3 h-3 text-red-500" />
+                            <div className="w-5 h-5 bg-brand-pink/10 rounded-full flex items-center justify-center">
+                              <X className="w-3 h-3 text-brand-pink" />
                             </div>
-                            <span className="text-gray-400 text-sm">{feature}</span>
+                            <span className="text-gray-400 dark:text-gray-500 text-sm">{feature}</span>
                           </div>
                         ))}
                       </div>
 
                       <Button
                         className={`w-full ${tier.popular
-                          ? 'bg-gradient-to-r from-pink-500 to-blue-500 hover:from-pink-600 hover:to-blue-600 text-white'
-                          : 'bg-white border-2 border-red-500 text-red-500 hover:bg-red-50'
+                          ? 'bg-gradient-to-r from-brand-pink to-brand-blue hover:from-brand-pink/90 hover:to-brand-blue/90 text-white'
+                          : 'bg-white border-2 border-brand-pink text-brand-pink hover:bg-brand-pink/5'
                           } transition-all duration-300`}
                       >
                         Get Started Now
@@ -199,15 +199,15 @@ export function Pricing() {
                   </Card>
                 </div>
               ) : (
-                <Card className="relative bg-white rounded-2xl shadow-lg border border-gray-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                <Card className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
                   <CardHeader className="text-center pb-6">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{tier.name}</h3>
-                    <p className="text-gray-600 text-sm mb-4">{tier.description}</p>
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{tier.name}</h3>
+                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">{tier.description}</p>
                     <div className="mt-4">
-                      <span className="text-4xl font-bold text-gray-900">
+                      <span className="text-4xl font-bold text-gray-900 dark:text-white">
                         {isYearly ? tier.price.yearly : tier.price.monthly}
                       </span>
-                      <span className="text-gray-500 ml-2">
+                      <span className="text-gray-500 dark:text-gray-400 ml-2">
                         / {isYearly ? 'Year' : 'Month'}
                       </span>
                     </div>
@@ -218,28 +218,28 @@ export function Pricing() {
                       {/* Included Features */}
                       {tier.features.included.map((feature, featureIndex) => (
                         <div key={featureIndex} className="flex items-center gap-3">
-                          <div className="w-5 h-5 bg-blue-100 rounded-full flex items-center justify-center">
-                            <Check className="w-3 h-3 text-blue-600" />
+                          <div className="w-5 h-5 bg-brand-blue/10 rounded-full flex items-center justify-center">
+                            <Check className="w-3 h-3 text-brand-blue" />
                           </div>
-                          <span className="text-gray-700 text-sm">{feature}</span>
+                          <span className="text-gray-700 dark:text-gray-200 text-sm">{feature}</span>
                         </div>
                       ))}
 
                       {/* Excluded Features */}
                       {tier.features.excluded.map((feature, featureIndex) => (
                         <div key={featureIndex} className="flex items-center gap-3">
-                          <div className="w-5 h-5 bg-red-100 rounded-full flex items-center justify-center">
-                            <X className="w-3 h-3 text-red-500" />
+                          <div className="w-5 h-5 bg-brand-pink/10 rounded-full flex items-center justify-center">
+                            <X className="w-3 h-3 text-brand-pink" />
                           </div>
-                          <span className="text-gray-400 text-sm">{feature}</span>
+                          <span className="text-gray-400 dark:text-gray-500 text-sm">{feature}</span>
                         </div>
                       ))}
                     </div>
 
                     <Button
                       className={`w-full ${tier.popular
-                        ? 'bg-gradient-to-r from-pink-500 to-blue-500 hover:from-pink-600 hover:to-blue-600 text-white'
-                        : 'bg-white border-2 border-red-500 text-red-500 hover:bg-red-50'
+                        ? 'bg-gradient-to-r from-brand-pink to-brand-blue hover:from-brand-pink/90 hover:to-brand-blue/90 text-white'
+                        : 'bg-white border-2 border-brand-pink text-brand-pink hover:bg-brand-pink/5'
                         } transition-all duration-300`}
                     >
                       Get Started Now

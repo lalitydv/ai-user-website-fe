@@ -6,6 +6,13 @@
   .text-balance {
     text-wrap: balance;
   }
+  
+  .bg-launch-product {
+    background-image: url('/images/Home/launch-your-product.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 }
 
 @layer base {

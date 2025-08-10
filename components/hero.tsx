@@ -1,18 +1,15 @@
 "use client"
 
-import type React from "react"
-
-import { useState, useRef } from "react"
+import React, { useState, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Paperclip, Globe, Send, Plus, Check, AlertCircle } from "lucide-react"
+import { Paperclip, Globe, Send, Plus, Check, AlertCircle, ChevronUp } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import Typewriter from 'typewriter-effect'
 import { useRouter } from "next/navigation"
 import Image from "next/image"
-
 export function Hero() {
   const [prompt, setPrompt] = useState("")
   const [isPublicDropdownOpen, setIsPublicDropdownOpen] = useState(false)
@@ -24,9 +21,9 @@ export function Hero() {
   const [urlError, setUrlError] = useState("")
   const [isValidUrl, setIsValidUrl] = useState(false)
   const [isFocused, setIsFocused] = useState(false)
+  const [showScrollTop, setShowScrollTop] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
-
   // Typewriter effect prompts
   const prompts = [
     "Create a dashboard to visualize sales data...",
@@ -113,11 +110,28 @@ export function Hero() {
     }
   }
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
+
+  // Add scroll event listener to show/hide scroll to top button
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 300)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <section
-      className="min-h-screen flex items-center justify-center relative bg-cover bg-center bg-no-repeat"
+      className="min-h-[80vh] flex items-center justify-center relative bg-cover bg-center bg-no-repeat"
       style={{
-        backgroundImage: 'url(/images/Home/banerbg.png)',
+        backgroundImage: 'url(/images/Home/hero-bg.png)',
         backgroundColor: '#f8fafc' // Fallback color
       }}
     >
@@ -131,14 +145,14 @@ export function Hero() {
             <div className="space-y-6">
               <div className="space-y-6">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
-                  <span className="bg-gradient-to-r from-[#F72353] to-[#235EAD] bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-brand-pink to-brand-blue bg-clip-text text-transparent">
                     <div className="flex justify-center items-center">
                       <Image
                         src="/images/Logo/buil-ai.png"
                         alt="buildro.ai Logo"
                         width={200}
                         height={40}
-                        className="h-10 w-auto object-contain"
+                        className="h-20 w-auto object-contain"
                         priority
                       />
                     </div>
@@ -150,24 +164,10 @@ export function Hero() {
               </div>
 
               <div className="relative flex justify-center items-center space-x-8 mt-12">
-                {/* Animated decorative background circles */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-10">
-                  {/* Large animated circles covering full screen */}
-                  <div className="w-screen h-screen rounded-full border border-gradient-to-r from-[#235EAD]/20 to-[#F72353]/20 bg-gradient-to-r from-[#235EAD]/8 to-[#F72353]/8 animate-pulse"></div>
-                  <div className="absolute w-[90vw] h-[90vw] rounded-full border border-gradient-to-r from-[#235EAD]/15 to-[#F72353]/15 bg-gradient-to-r from-[#235EAD]/6 to-[#F72353]/6 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-                  <div className="absolute w-[80vw] h-[80vw] rounded-full border border-gradient-to-r from-[#235EAD]/12 to-[#F72353]/12 bg-gradient-to-r from-[#235EAD]/4 to-[#F72353]/4 animate-pulse" style={{ animationDelay: '1s' }}></div>
-                  <div className="absolute w-[70vw] h-[70vw] rounded-full border border-gradient-to-r from-[#235EAD]/10 to-[#F72353]/10 bg-gradient-to-r from-[#235EAD]/3 to-[#F72353]/3 animate-pulse" style={{ animationDelay: '1.5s' }}></div>
-                  <div className="absolute w-[60vw] h-[60vw] rounded-full border border-gradient-to-r from-[#235EAD]/8 to-[#F72353]/8 bg-gradient-to-r from-[#235EAD]/2 to-[#F72353]/2 animate-pulse" style={{ animationDelay: '2s' }}></div>
 
-                  {/* Zigzag animated elements - hidden on mobile */}
-                  <div className="hidden md:block absolute top-10 left-10 w-20 h-20 rounded-full bg-gradient-to-r from-[#235EAD]/30 to-[#F72353]/30 animate-bounce"></div>
-                  <div className="hidden md:block absolute top-20 right-10 w-16 h-16 rounded-full bg-gradient-to-r from-[#F72353]/25 to-[#235EAD]/25 animate-bounce" style={{ animationDelay: '0.3s' }}></div>
-                  <div className="hidden md:block absolute bottom-20 left-20 w-18 h-18 rounded-full bg-gradient-to-r from-[#235EAD]/20 to-[#F72353]/20 animate-bounce" style={{ animationDelay: '0.6s' }}></div>
-                  <div className="hidden md:block absolute bottom-10 right-10 w-14 h-14 rounded-full bg-gradient-to-r from-[#F72353]/15 to-[#235EAD]/15 animate-bounce" style={{ animationDelay: '0.9s' }}></div>
-                </div>
 
                 {/* Clean Prompt Interface */}
-                <div className="flex-1 w-full md:w-[1200px] max-w-4xl relative z-10">
+                <div className="flex-1 w-full md:w-[768px] max-w-4xl relative z-10">
                   <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-6">
                     <div className="space-y-4">
                       <div className="relative">
@@ -195,8 +195,8 @@ export function Hero() {
                           onBlur={() => setIsFocused(false)}
                           rows={3}
                           className={`w-full text-base py-4 px-4 border rounded-xl bg-white dark:bg-gray-800 text-gray-900 dark:text-white resize-none transition-all duration-300 ${isFocused
-                            ? 'border-[#F72353] ring-2 ring-[#F72353]/20 shadow-lg'
-                            : 'border-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-[#F72353]/20 focus:border-[#F72353]'
+                            ? 'border-brand-pink ring-2 ring-brand-pink/20 shadow-lg'
+                            : 'border-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-brand-pink/20 focus:border-brand-pink'
                             }`}
                           placeholder=""
                           style={{
@@ -226,7 +226,7 @@ export function Hero() {
                           {/* Plus Dropdown */}
                           <DropdownMenu open={isPlusDropdownOpen} onOpenChange={setIsPlusDropdownOpen}>
                             <DropdownMenuTrigger asChild>
-                              <Button variant="ghost" size="sm" className="text-gray-500 dark:text-gray-400 hover:text-[#F72353] dark:hover:text-[#F72353]">
+                              <Button variant="ghost" size="sm" className="text-gray-500 dark:text-gray-400 hover:text-brand-pink dark:hover:text-brand-pink">
                                 <Plus className="h-4 w-4" />
                               </Button>
                             </DropdownMenuTrigger>
@@ -250,7 +250,7 @@ export function Hero() {
                           <Button
                             variant="ghost"
                             size="sm"
-                            className="text-gray-500 dark:text-gray-400 hover:text-[#F72353] dark:hover:text-[#F72353]"
+                            className="text-gray-500 dark:text-gray-400 hover:text-brand-pink dark:hover:text-brand-pink"
                             onClick={handleFileUpload}
                           >
                             <Paperclip className="h-4 w-4 mr-2" />
@@ -260,7 +260,7 @@ export function Hero() {
                           {/* Public Dropdown */}
                           <DropdownMenu open={isPublicDropdownOpen} onOpenChange={setIsPublicDropdownOpen}>
                             <DropdownMenuTrigger asChild>
-                              <Button variant="ghost" size="sm" className="text-gray-500 dark:text-gray-400 hover:text-[#235EAD] dark:hover:text-[#235EAD]">
+                              <Button variant="ghost" size="sm" className="text-gray-500 dark:text-gray-400 hover:text-brand-blue dark:hover:text-brand-blue">
                                 <Globe className="h-4 w-4 mr-2" />
                                 Public
                               </Button>
@@ -276,12 +276,12 @@ export function Hero() {
                                     <div className="flex items-center justify-center w-5 h-5 mt-0.5">
                                       <div
                                         className={`w-4 h-4 rounded-full border-2 ${selectedPrivacy === option.id
-                                          ? "border-[#F72353] bg-[#F72353]"
+                                          ? "border-brand-pink bg-brand-pink"
                                           : "border-gray-300 dark:border-gray-600"
                                           }`}
                                       >
                                         {selectedPrivacy === option.id && (
-                                          <div className="w-full h-full rounded-full bg-[#F72353] flex items-center justify-center">
+                                          <div className="w-full h-full rounded-full bg-brand-pink flex items-center justify-center">
                                             <div className="w-2 h-2 bg-white rounded-full"></div>
                                           </div>
                                         )}
@@ -302,7 +302,7 @@ export function Hero() {
                           size="sm"
                           onClick={handleSendPrompt}
                           disabled={!prompt.trim()}
-                          className="bg-gradient-to-r from-[#F72353] to-[#235EAD] hover:from-[#F72353]/90 hover:to-[#235EAD]/90 text-white rounded-full p-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="bg-gradient-to-r from-brand-pink to-brand-blue hover:from-brand-pink/90 hover:to-brand-blue/90 text-white rounded-full p-3 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           <Send className="h-4 w-4" />
                         </Button>
@@ -363,7 +363,7 @@ export function Hero() {
               <Button
                 onClick={handleFigmaImport}
                 disabled={!isValidUrl}
-                className="bg-gradient-to-r from-[#F72353] to-[#235EAD] hover:from-[#F72353]/90 hover:to-[#235EAD]/90 text-white"
+                className="bg-gradient-to-r from-brand-pink to-brand-blue hover:from-brand-pink/90 hover:to-brand-blue/90 text-white"
               >
                 Import Design
               </Button>
@@ -382,7 +382,7 @@ export function Hero() {
             </DialogTitle>
           </DialogHeader>
           <div className="text-center py-8">
-            <div className="w-16 h-16 bg-gradient-to-r from-[#F72353] to-[#235EAD] rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-16 h-16 bg-gradient-to-r from-brand-pink to-brand-blue rounded-full flex items-center justify-center mx-auto mb-4">
               <span className="text-white text-2xl">🚀</span>
             </div>
             <h3 className="text-lg font-semibold mb-2">Coming Soon!</h3>
@@ -391,13 +391,24 @@ export function Hero() {
             </p>
             <Button
               onClick={() => setShowXDDialog(false)}
-              className="bg-gradient-to-r from-[#F72353] to-[#235EAD] hover:from-[#F72353]/90 hover:to-[#235EAD]/90 text-white"
+              className="bg-gradient-to-r from-brand-pink to-brand-blue hover:from-brand-pink/90 hover:to-brand-blue/90 text-white"
             >
               Got it
             </Button>
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Scroll to Top Button */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 z-50 w-14 h-14 bg-gradient-to-r from-brand-pink to-brand-blue hover:from-brand-pink/90 hover:to-brand-blue/90 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 flex items-center justify-center"
+          aria-label="Scroll to top"
+        >
+          <ChevronUp className="h-6 w-6" />
+        </button>
+      )}
     </section>
   )
 }

@@ -33,6 +33,11 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  
+  /* Brand Colors */
+  --brand-pink: 347 93% 55%;
+  --brand-blue: 217 67% 42%;
+  --brand-gradient: linear-gradient(135deg, hsl(var(--brand-pink)) 0%, hsl(var(--brand-blue)) 100%);
 }
 
 .dark {
@@ -63,6 +68,11 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(0.269 0 0);
   --sidebar-ring: oklch(0.439 0 0);
+  
+  /* Brand Colors - Dark Mode */
+  --brand-pink: 347 93% 60%;
+  --brand-blue: 217 67% 50%;
+  --brand-gradient: linear-gradient(135deg, hsl(var(--brand-pink)) 0%, hsl(var(--brand-blue)) 100%);
 }
 
 @theme inline {
@@ -133,4 +143,78 @@ html {
 .animate-gradient {
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
+}
+
+/* Custom rotation animation from 0 to 180 degrees */
+@keyframes rotate-180 {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-rotate-180 {
+  animation: rotate-180 10s ease-in-out infinite;
+}
+
+/* Scrollbar hiding utilities */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
+
+/* Custom carousel animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.carousel-slide {
+  animation: slideIn 0.5s ease-out;
+}
+
+/* Team section background colors */
+.team-section-bg {
+  background-color: hsl(280 20% 95%); /* Light pink/lavender for light theme */
+}
+
+.dark .team-section-bg {
+  background-color: hsl(280 20% 15%); /* Darker version for dark theme */
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 768px) {
+  .strategy-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .team-carousel {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Enhanced hover effects */
+.hover-lift {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
 }

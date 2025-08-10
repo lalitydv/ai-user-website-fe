@@ -2,7 +2,7 @@
 
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Heart, ChevronDown } from "lucide-react"
+import { Heart, ChevronDown, Filter, X } from "lucide-react"
 import { useState } from "react"
 import Image from "next/image"
 
@@ -107,6 +107,29 @@ export function Community() {
     }
   ])
 
+  const [selectedFilters, setSelectedFilters] = useState<string[]>(["saas"])
+  const [activeFilter, setActiveFilter] = useState<string>("all")
+
+  const filterOptions = [
+    { id: "saas", label: "SaaS" },
+    { id: "portfolio", label: "Portfolio" },
+    { id: "ecommerce", label: "E-commerce" },
+    { id: "admin", label: "Admin Panel" },
+    { id: "website", label: "Website" }
+  ]
+
+  const toggleFilter = (filterId: string) => {
+    if (selectedFilters.includes(filterId)) {
+      setSelectedFilters(selectedFilters.filter(f => f !== filterId))
+    } else {
+      setSelectedFilters([...selectedFilters, filterId])
+    }
+  }
+
+  const removeFilter = (filterId: string) => {
+    setSelectedFilters(selectedFilters.filter(f => f !== filterId))
+  }
+
   const toggleLike = (id: number) => {
     setTemplates(templates.map(template =>
       template.id === id ? { ...template, isLiked: !template.isLiked } : template
@@ -114,25 +137,72 @@ export function Community() {
   }
 
   return (
-    <section className="py-20 bg-white z-10">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-20 bg-white dark:bg-gray-900 z-10">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Community
-          </h2>
-          <div className="flex items-center justify-center gap-2 mb-6">
-            <div className="w-8 h-0.5 bg-gradient-to-r from-pink-500 to-blue-500"></div>
-            <div className="w-2 h-2 bg-pink-500 rounded-full"></div>
-            <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-            <div className="w-2 h-2 bg-pink-500 rounded-full"></div>
-            <div className="w-8 h-0.5 bg-gradient-to-r from-pink-500 to-blue-500"></div>
+        <div className="flex md:flex-row flex-col md:items-baseline md:justify-between justify-center items-center mb-16">
+          <div className="flex flex-col justify-center items-center mb-8">
+            <div className="flex flex-col  md:justify-start justify-center items-center">
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                Community
+              </h2>
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-0.5 bg-gradient-to-r from-brand-pink to-brand-blue"></div>
+                <div className="w-2 h-2 bg-brand-pink rounded-full"></div>
+                <div className="w-2 h-2 bg-gradient-to-r from-brand-pink to-brand-blue rounded-full"></div>
+                <div className="w-2 h-2 bg-brand-blue rounded-full"></div>
+                <div className="w-8 h-0.5 bg-gradient-to-r from-brand-pink to-brand-blue"></div>
+              </div>
+            </div>
+          </div>
+
+          {/* Filter Section - Hidden on mobile, centered on desktop */}
+          <div className="hidden md:flex justify-end items-center w-full">
+            <div className="flex flex-wrap items-center gap-3 justify-center">
+              {/* Filter Buttons */}
+              {filterOptions.map((filter) => (
+                <Button
+                  key={filter.id}
+                  variant={selectedFilters.includes(filter.id) ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => toggleFilter(filter.id)}
+                  className={`rounded-full ${selectedFilters.includes(filter.id)
+                    ? "bg-white dark:bg-gray-800 text-gray-900 dark:text-white border-gray-300 dark:border-gray-600 shadow-sm relative overflow-hidden"
+                    : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-gray-200 dark:hover:bg-gray-700"
+                    }`}
+                >
+                  {selectedFilters.includes(filter.id) && (
+                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-brand-pink to-brand-blue"></div>
+                  )}
+                  <span className={selectedFilters.includes(filter.id) ? "ml-2" : ""}>
+                    {filter.label}
+                  </span>
+                  {selectedFilters.includes(filter.id) && (
+                    <X className="ml-2 h-3 w-3" onClick={(e) => {
+                      e.stopPropagation()
+                      removeFilter(filter.id)
+                    }} />
+                  )}
+                </Button>
+              ))}
+
+              {/* Filter Dropdown */}
+              <Button
+                variant="outline"
+                size="sm"
+                className="rounded-full bg-gradient-to-r from-brand-pink to-brand-blue text-white border-0 shadow-sm hover:from-brand-pink/90 hover:to-brand-blue/90"
+              >
+                <Filter className="mr-2 h-4 w-4" />
+                Filter
+                <ChevronDown className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
           </div>
         </div>
 
         {/* Template Grid */}
         <div className=" mx-auto md:max-w-6xl w-full">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 md:grid-cols-3 gap-6">
             {templates.map((template) => (
               <Card key={template.id} className="group hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 rounded-2xl overflow-hidden">
                 <CardContent className="p-0">
@@ -160,7 +230,7 @@ export function Community() {
 
                   {/* Content */}
                   <div className="p-6">
-                    <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
                       {template.title}
                     </h3>
 
@@ -175,18 +245,18 @@ export function Community() {
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <span className="text-sm text-gray-600">{template.author.name}</span>
+                      <span className="text-sm text-gray-600 dark:text-gray-400">{template.author.name}</span>
                     </div>
 
                     {/* Remixes Progress Bar */}
                     <div className="mb-4">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm text-gray-600">Remixes</span>
-                        <span className="text-sm font-medium text-gray-900">{template.remixes}</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-400">Remixes</span>
+                        <span className="text-sm font-medium text-gray-900 dark:text-white">{template.remixes}</span>
                       </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                         <div
-                          className="bg-gradient-to-r from-pink-500 to-blue-500 h-2 rounded-full transition-all duration-300"
+                          className="bg-gradient-to-r from-brand-pink to-brand-blue h-2 rounded-full transition-all duration-300"
                           style={{ width: `${template.progress}%` }}
                         ></div>
                       </div>
@@ -197,7 +267,7 @@ export function Community() {
                       <Button
                         size="sm"
                         variant="outline"
-                        className="flex-1 text-gray-600 border-gray-300 hover:border-gray-400 hover:text-gray-700"
+                        className="flex-1 text-gray-600 dark:text-gray-400 border-gray-300 dark:border-gray-600 hover:border-gray-400 hover:text-gray-700 dark:hover:text-gray-300"
                       >
                         {template.type}
                       </Button>
@@ -220,7 +290,7 @@ export function Community() {
           <Button
             variant="outline"
             size="lg"
-            className="border-2 border-gray-300 text-gray-700 px-8 py-3 text-lg font-semibold rounded-full hover:border-gray-400 hover:text-gray-800 transition-all duration-300"
+            className="border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-8 py-3 text-lg font-semibold rounded-full hover:border-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-all duration-300"
           >
             View More
             <ChevronDown className="w-5 h-5 ml-2" />

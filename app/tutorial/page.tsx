@@ -1,323 +1,212 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { Play, Clock, Users, Star } from "lucide-react";
+import { Play, ChevronDown } from "lucide-react";
+import { useState } from "react";
+import { Testimonials } from "@/components/testimonials";
 
 export default function TutorialPage() {
+    const [selectedCategory, setSelectedCategory] = useState("All");
+
+    // Course data with categories
+    const allCourses = [
+        {
+            id: 1,
+            title: "The Arts and Science of Relationships: Understanding Human Needs",
+            category: "Courses",
+            duration: "80 hours",
+            step: "Step 14/66",
+            subtitle: "Relationships & Self",
+            image: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+        },
+        {
+            id: 2,
+            title: "Positive Psychiatry and Mental Health",
+            category: "Courses",
+            duration: "12 hours",
+            step: "Step 2/12",
+            subtitle: "Importance of healthy food",
+            image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+        },
+        {
+            id: 3,
+            title: "Conversations That Inspire: Coaching Learning, Leadership and Change",
+            category: "Courses",
+            duration: "35 hours",
+            step: "Step 10/30",
+            subtitle: "How do people really help...",
+            image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+        },
+        {
+            id: 4,
+            title: "Advanced Photography Techniques",
+            category: "Videos",
+            duration: "8 hours",
+            step: "Step 5/20",
+            subtitle: "Professional Skills",
+            image: "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+        },
+        {
+            id: 5,
+            title: "Digital Art Fundamentals",
+            category: "Videos",
+            duration: "15 hours",
+            step: "Step 8/25",
+            subtitle: "Creative Design",
+            image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+        },
+        {
+            id: 6,
+            title: "JavaScript Mastery Quiz",
+            category: "Quizzes",
+            duration: "2 hours",
+            step: "Quiz 3/10",
+            subtitle: "Programming Skills",
+            image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+        }
+    ];
+
+    // Filter courses based on selected category
+    const filteredCourses = selectedCategory === "All"
+        ? allCourses
+        : allCourses.filter(course => course.category === selectedCategory);
+
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-            {/* Hero Section */}
-            <section className="relative py-20 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto text-center">
-                    <div className="mb-8">
-                        <Badge variant="secondary" className="mb-4">
-                            Learn & Build
-                        </Badge>
-                        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-                            Master AI-Powered
-                            <span className="text-blue-600"> Development</span>
-                        </h1>
-                        <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-                            Learn how to build amazing applications using our AI platform. From beginner to advanced, we've got you covered.
-                        </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
-                                Start Learning
-                            </Button>
-                            <Button size="lg" variant="outline">
-                                Browse Courses
-                            </Button>
+        <>
+
+
+            <div className="min-h-screen bg-background">
+                {/* Header Section */}
+                <section className="relative px-4 sm:px-6 lg:px-8">
+                    <div className="max-w-7xl mx-auto text-center mt-32">
+                        <div className="mb-8">
+                            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+                                Fast Learning
+                            </h1>
+                            {/* Decorative line with circles */}
+                            <div className="flex justify-center items-center mb-8">
+                                <div className="w-32 h-px bg-border"></div>
+                                <div className="flex gap-2 mx-4">
+                                    <div className="w-2 h-2 rounded-full bg-red-500"></div>
+                                    <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                                    <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                                </div>
+                                <div className="w-32 h-px bg-border"></div>
+                            </div>
+                            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
+                                Start for free. Upgrade to get the capacity that exactly matches your team's needs.
+                            </p>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            {/* Learning Paths */}
-            <section className="py-20 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                            Choose Your Learning Path
-                        </h2>
-                        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                            Follow structured learning paths designed for your skill level
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {[
-                            {
-                                title: "Beginner",
-                                description: "Start your journey with AI development",
-                                duration: "4-6 weeks",
-                                courses: 8,
-                                color: "bg-green-100 text-green-800",
-                                progress: 0
-                            },
-                            {
-                                title: "Intermediate",
-                                description: "Build complex applications with AI",
-                                duration: "6-8 weeks",
-                                courses: 12,
-                                color: "bg-blue-100 text-blue-800",
-                                progress: 25
-                            },
-                            {
-                                title: "Advanced",
-                                description: "Master advanced AI techniques",
-                                duration: "8-10 weeks",
-                                courses: 15,
-                                color: "bg-purple-100 text-purple-800",
-                                progress: 50
-                            }
-                        ].map((path, index) => (
-                            <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
-                                <CardHeader>
-                                    <div className="flex items-center justify-between mb-4">
-                                        <Badge className={path.color}>
-                                            {path.title}
-                                        </Badge>
-                                        <div className="text-sm text-gray-500">
-                                            {path.duration}
-                                        </div>
-                                    </div>
-                                    <CardTitle className="text-xl">{path.title} Path</CardTitle>
-                                    <CardDescription className="text-base">
-                                        {path.description}
-                                    </CardDescription>
-                                </CardHeader>
-                                <CardContent>
-                                    <div className="space-y-4">
-                                        <div className="flex items-center justify-between text-sm">
-                                            <span className="text-gray-600">Progress</span>
-                                            <span className="font-medium">{path.progress}%</span>
-                                        </div>
-                                        <Progress value={path.progress} className="h-2" />
-                                        <div className="flex items-center gap-2 text-sm text-gray-600">
-                                            <Play className="h-4 w-4" />
-                                            {path.courses} courses
-                                        </div>
-                                        <Button className="w-full">
-                                            {path.progress === 0 ? "Start Path" : "Continue Learning"}
-                                        </Button>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Featured Courses */}
-            <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                            Featured Courses
-                        </h2>
-                        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                            Most popular courses handpicked for you
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {[
-                            {
-                                title: "Building Your First AI App",
-                                instructor: "Sarah Chen",
-                                duration: "2 hours",
-                                students: "1.2K",
-                                rating: 4.8,
-                                level: "Beginner",
-                                thumbnail: "/courses/ai-app.jpg",
-                                description: "Learn the basics of AI development and build your first application"
-                            },
-                            {
-                                title: "Advanced AI Integration",
-                                instructor: "Mike Johnson",
-                                duration: "4 hours",
-                                students: "856",
-                                rating: 4.9,
-                                level: "Intermediate",
-                                thumbnail: "/courses/ai-integration.jpg",
-                                description: "Master advanced AI integration techniques for production apps"
-                            },
-                            {
-                                title: "AI-Powered E-commerce",
-                                instructor: "Emma Davis",
-                                duration: "6 hours",
-                                students: "634",
-                                rating: 4.7,
-                                level: "Advanced",
-                                thumbnail: "/courses/ecommerce.jpg",
-                                description: "Build a complete e-commerce platform with AI features"
-                            }
-                        ].map((course, index) => (
-                            <Card key={index} className="hover:shadow-lg transition-shadow duration-300">
-                                <div className="aspect-video bg-gradient-to-br from-blue-100 to-purple-100 rounded-t-lg flex items-center justify-center">
-                                    <Play className="h-12 w-12 text-blue-600" />
+                {/* Featured Courses Section */}
+                <section className="px-4 sm:px-6 lg:px-8 mb-12">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            {/* Portrait Photography Card */}
+                            <Card className="relative overflow-hidden h-80 lg:h-96 bg-card">
+                                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 z-10" />
+                                <div className="absolute inset-0 bg-cover bg-center" style={{
+                                    backgroundImage: "url('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')"
+                                }} />
+                                <div className="absolute bottom-0 left-0 p-6 z-20 text-white">
+                                    <p className="text-sm mb-2 opacity-90">Continue Course</p>
+                                    <h3 className="text-2xl lg:text-3xl font-bold mb-4">
+                                        Portrait Photography Fundamentals
+                                    </h3>
                                 </div>
-                                <CardHeader>
-                                    <div className="flex items-center justify-between mb-2">
-                                        <Badge variant="secondary">{course.level}</Badge>
-                                        <div className="flex items-center gap-1">
-                                            <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                                            <span className="text-sm font-medium">{course.rating}</span>
-                                        </div>
-                                    </div>
-                                    <CardTitle className="text-lg">{course.title}</CardTitle>
-                                    <CardDescription className="text-base">
-                                        {course.description}
-                                    </CardDescription>
-                                </CardHeader>
-                                <CardContent>
-                                    <div className="flex items-center justify-between text-sm text-gray-600 mb-4">
-                                        <div className="flex items-center gap-4">
-                                            <span className="flex items-center gap-1">
-                                                <Clock className="h-4 w-4" />
-                                                {course.duration}
-                                            </span>
-                                            <span className="flex items-center gap-1">
-                                                <Users className="h-4 w-4" />
-                                                {course.students}
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div className="text-sm text-gray-500 mb-4">
-                                        by {course.instructor}
-                                    </div>
-                                    <Button className="w-full">
-                                        Start Course
+                                <div className="absolute bottom-6 right-6 z-20">
+                                    <Button size="icon" className="w-12 h-12 rounded-full bg-card-foreground hover:bg-muted-foreground">
+                                        <Play className="h-5 w-5 text-background" />
                                     </Button>
-                                </CardContent>
+                                </div>
                             </Card>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
-            {/* Step-by-Step Guide */}
-            <section className="py-20 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                            Quick Start Guide
-                        </h2>
-                        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                            Get up and running in minutes with our step-by-step guide
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                        <div className="space-y-8">
-                            {[
-                                {
-                                    step: "01",
-                                    title: "Create Your Account",
-                                    description: "Sign up for free and get instant access to our platform"
-                                },
-                                {
-                                    step: "02",
-                                    title: "Choose Your Project",
-                                    description: "Select from our templates or start from scratch"
-                                },
-                                {
-                                    step: "03",
-                                    title: "Describe Your Idea",
-                                    description: "Tell our AI what you want to build in plain English"
-                                },
-                                {
-                                    step: "04",
-                                    title: "Customize & Deploy",
-                                    description: "Fine-tune your application and deploy it live"
-                                }
-                            ].map((step, index) => (
-                                <div key={index} className="flex gap-6">
-                                    <div className="flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-lg">
-                                        {step.step}
-                                    </div>
-                                    <div>
-                                        <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                                            {step.title}
-                                        </h3>
-                                        <p className="text-gray-600">
-                                            {step.description}
-                                        </p>
+                            {/* Modern Art History Card */}
+                            <Card className="relative overflow-hidden h-80 lg:h-96 bg-card">
+                                <div className="absolute inset-0 bg-gradient-to-b from-teal-600 via-red-500 to-yellow-500 z-10" />
+                                <div className="absolute inset-0 z-20 flex flex-col justify-between p-6 text-white">
+                                    <h3 className="text-2xl lg:text-3xl font-bold">
+                                        History of Modern Art Movements
+                                    </h3>
+                                    <div className="text-sm opacity-90">
+                                        <p>Final Quiz</p>
+                                        <p>Completed 12/16</p>
                                     </div>
                                 </div>
-                            ))}
+                                <div className="absolute bottom-6 right-6 z-30">
+                                    <Button size="icon" className="w-12 h-12 rounded-full bg-card-foreground hover:bg-muted-foreground">
+                                        <Play className="h-5 w-5 text-background" />
+                                    </Button>
+                                </div>
+                            </Card>
                         </div>
+                    </div>
+                </section>
 
-                        <div className="bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl p-8">
-                            <div className="aspect-video bg-white rounded-lg shadow-lg flex items-center justify-center">
-                                <div className="text-center">
-                                    <Play className="h-16 w-16 text-blue-600 mx-auto mb-4" />
-                                    <p className="text-gray-600">Watch Demo Video</p>
-                                </div>
+                {/* Course Categories and Filter */}
+                <section className="px-4 sm:px-6 lg:px-8 mb-12">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <div className="flex items-center gap-6">
+                                {["All", "Courses", "Videos", "Quizzes"].map((category) => (
+                                    <button
+                                        key={category}
+                                        onClick={() => setSelectedCategory(category)}
+                                        className={`text-lg font-medium transition-colors ${selectedCategory === category
+                                            ? "text-foreground font-bold"
+                                            : "text-muted-foreground hover:text-foreground"
+                                            }`}
+                                    >
+                                        {category}
+                                    </button>
+                                ))}
+                            </div>
+                            <div className="flex items-center gap-2 border border-border rounded-lg px-3 py-2 bg-card">
+                                <span className="text-sm text-card-foreground">Current</span>
+                                <ChevronDown className="h-4 w-4 text-muted-foreground" />
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            {/* Resources */}
-            <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-                <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-                            Additional Resources
-                        </h2>
-                        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                            Explore our comprehensive learning resources
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {[
-                            { title: "Documentation", count: "500+", description: "Comprehensive guides and API references" },
-                            { title: "Video Tutorials", count: "200+", description: "Step-by-step video guides" },
-                            { title: "Code Examples", count: "1000+", description: "Ready-to-use code snippets" },
-                            { title: "Community Forum", count: "10K+", description: "Get help from the community" }
-                        ].map((resource, index) => (
-                            <Card key={index} className="text-center hover:shadow-lg transition-shadow duration-300">
-                                <CardHeader>
-                                    <CardTitle className="text-lg">{resource.title}</CardTitle>
-                                    <div className="text-3xl font-bold text-blue-600 mb-2">
-                                        {resource.count}
+                {/* Course Grid Section */}
+                <section className="px-4 sm:px-6 lg:px-8 pb-20">
+                    <div className="max-w-7xl mx-auto">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {filteredCourses.map((course) => (
+                                <Card key={course.id} className="overflow-hidden hover:shadow-lg transition-shadow duration-300 bg-card border-border">
+                                    <div className="relative h-48">
+                                        <div className="absolute inset-0 bg-cover bg-center" style={{
+                                            backgroundImage: `url('${course.image}')`
+                                        }} />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                                        <div className="absolute bottom-0 left-0 p-4 text-white">
+                                            <p className="text-sm mb-1">{course.step}</p>
+                                            <p className="text-sm font-medium">{course.subtitle}</p>
+                                        </div>
+                                        <div className="absolute bottom-4 right-4">
+                                            <Button size="icon" className="w-10 h-10 rounded-full bg-card-foreground hover:bg-muted-foreground">
+                                                <Play className="h-4 w-4 text-background" />
+                                            </Button>
+                                        </div>
                                     </div>
-                                    <CardDescription>{resource.description}</CardDescription>
-                                </CardHeader>
-                                <CardContent>
-                                    <Button variant="outline" className="w-full">
-                                        Explore
-                                    </Button>
-                                </CardContent>
-                            </Card>
-                        ))}
+                                    <CardContent className="p-4">
+                                        <h3 className="font-bold text-card-foreground text-lg mb-2 leading-tight">
+                                            {course.title}
+                                        </h3>
+                                        <p className="text-muted-foreground text-sm">Course, {course.duration}</p>
+                                    </CardContent>
+                                </Card>
+                            ))}
+                        </div>
                     </div>
-                </div>
-            </section>
-
-            {/* CTA Section */}
-            <section className="py-20 px-4 sm:px-6 lg:px-8 bg-blue-600">
-                <div className="max-w-4xl mx-auto text-center">
-                    <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-                        Ready to Start Learning?
-                    </h2>
-                    <p className="text-xl text-blue-100 mb-8">
-                        Join thousands of developers learning AI-powered development with our platform.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <Button size="lg" variant="secondary" className="bg-white text-blue-600 hover:bg-gray-100">
-                            Start Free Course
-                        </Button>
-                        <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
-                            View All Courses
-                        </Button>
-                    </div>
-                </div>
-            </section>
-        </div>
+                </section>
+            </div>
+            <Testimonials />
+        </>
     );
 } 
