@@ -1,6 +1,6 @@
 "use client"
 
-import { GeneratingInterface } from "@/components/generating-interface"
+import { AIGeneratorLayout } from "@/components/ai-generator/ai-generator-layout"
 import { useSearchParams, useRouter } from "next/navigation"
 import { useState, useEffect, Suspense } from "react"
 
@@ -45,18 +45,14 @@ function GeneratingContent() {
         router.push('/')
     }
 
-    const handleComplete = () => {
-        // This function is no longer needed since result is shown in the same interface
-        console.log('Generation complete')
-    }
+
 
     return (
-        <GeneratingInterface
+        <AIGeneratorLayout
             prompt={prompt}
             currentStep={currentStep}
             progress={progress}
             onBack={handleBack}
-            onComplete={handleComplete}
         />
     )
 }
