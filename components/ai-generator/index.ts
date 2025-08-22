@@ -1,11 +1,11 @@
-export { AIGeneratorLayout } from './ai-generator-layout'
+// Main Workspace Component
+export { Workspace } from './workspace'
+
+// Individual Components
+export { AppBar } from './app-bar'
+export { AssistantPanel } from './assistant-panel'
+export { CanvasGradient } from './canvas-gradient'
+export { WidgetCard } from './widget-card'
+export { CodeCard, SampleCodeCard } from './code-card'
+export { PreviewCard } from './preview-card'
 export { TopHeader } from './top-header'
-export { LeftSidebar } from './left-sidebar'
-export { MainContent } from './main-content'
-export { RightPanel } from './right-panel'
-export { ProgressSteps } from './progress-steps'
-export { ChatInterface } from './chat-interface'
-export { PreviewView } from './views/preview-view'
-export { CodeView } from './views/code-view'
-export { VideoView } from './views/video-view'
-export { FilesView } from './views/files-view'

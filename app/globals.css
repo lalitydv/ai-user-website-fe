@@ -38,6 +38,25 @@
   --brand-pink: 347 93% 55%;
   --brand-blue: 217 67% 42%;
   --brand-gradient: linear-gradient(135deg, hsl(var(--brand-pink)) 0%, hsl(var(--brand-blue)) 100%);
+  
+  /* Buildro Workspace Variables */
+  --bg: 0 0% 100%;
+  --bg-muted: 210 40% 96%;
+  --surface: 0 0% 100%;
+  --surface-2: 210 40% 98%;
+  --text: 222.2 84% 4.9%;
+  --text-muted: 215.4 16.3% 46.9%;
+  --brand: 347 93% 55%;
+  --brand-600: 347 93% 45%;
+  --success: 142 76% 36%;
+  --warning: 38 92% 50%;
+  --danger: 0 84.2% 60.2%;
+  --shadow-soft: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-2xl: 1rem;
 }
 
 .dark {
@@ -73,6 +92,21 @@
   --brand-pink: 347 93% 60%;
   --brand-blue: 217 67% 50%;
   --brand-gradient: linear-gradient(135deg, hsl(var(--brand-pink)) 0%, hsl(var(--brand-blue)) 100%);
+  
+  /* Buildro Workspace Variables - Dark Mode */
+  --bg: 222.2 84% 4.9%;
+  --bg-muted: 217.2 32.6% 17.5%;
+  --surface: 222.2 84% 4.9%;
+  --surface-2: 217.2 32.6% 17.5%;
+  --text: 210 40% 98%;
+  --text-muted: 215 20.2% 65.1%;
+  --brand: 347 93% 60%;
+  --brand-600: 347 93% 50%;
+  --success: 142 76% 46%;
+  --warning: 38 92% 60%;
+  --danger: 0 62.8% 30.6%;
+  --shadow-soft: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3);
 }
 
 @theme inline {

@@ -6,6 +6,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { ThemeProvider } from "@/components/theme-provider"
 import { AuthProvider } from "@/contexts/AuthContext"
+import { ConditionalLayout } from "@/components/conditional-layout"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -31,9 +32,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <AuthProvider>
-            <Header />
-            {children}
-            <Footer />
+            <ConditionalLayout>
+              {children}
+            </ConditionalLayout>
           </AuthProvider>
         </ThemeProvider>
       </body>

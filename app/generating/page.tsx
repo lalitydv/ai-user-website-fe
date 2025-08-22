@@ -1,6 +1,6 @@
 "use client"
 
-import { AIGeneratorLayout } from "@/components/ai-generator/ai-generator-layout"
+import { Workspace } from "@/components/ai-generator"
 import { useSearchParams, useRouter } from "next/navigation"
 import { useState, useEffect, Suspense } from "react"
 
@@ -45,25 +45,18 @@ function GeneratingContent() {
         router.push('/')
     }
 
-
-
     return (
-        <AIGeneratorLayout
-            prompt={prompt}
-            currentStep={currentStep}
-            progress={progress}
-            onBack={handleBack}
-        />
+        <Workspace projectTitle={`AI Generated - ${prompt}`} />
     )
 }
 
 export default function GeneratingPage() {
     return (
         <Suspense fallback={
-            <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+            <div className="min-h-screen bg-[hsl(var(--bg))] flex items-center justify-center">
                 <div className="text-center">
-                    <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-[#F72353]"></div>
-                    <p className="mt-4 text-gray-600 dark:text-gray-400">Loading...</p>
+                    <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-[hsl(var(--brand))]"></div>
+                    <p className="mt-4 text-[hsl(var(--text-muted))]">Loading...</p>
                 </div>
             </div>
         }>
